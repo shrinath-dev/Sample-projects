@@ -1,2 +1,2 @@
 # Sample-projects
-This repository contains my demo projects, built as part of my learning journey. Each project comes with a README that explains the topic, requirements, and steps to practice it yourself. I’ll keep adding more projects as I explore new skills.
+This repository contains my demo projects and projects that created to practice some concepts, built as part of my learning journey. I’ll keep adding more projects as I explore new skills. You can recreate them on your own for practicing purpose.
