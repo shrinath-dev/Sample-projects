@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Bella Vista - Authentic Italian</title>
+  </head>
+
+  <body>
+    <header id="header">
+      <div class="container">
+        <nav class="navbar">
+          <div class="logo">
+            <h1>Bella Vista</h1>
+            <span class="tagline">Authentic Italian Cuisine</span>
+          </div>
+
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-text">
+            <h2>Welcome to Bella Vista</h2>
+            <p>Experience the authentic taste of italy in the heart of city</p>
+          </div>
+          <div class="hero-cta">
+            <div class="primary-hero-cta"><a href=""> View More</a></div>
+            <div class="secondary-hero-cta">
+              <a href="">Make Reservation</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="menu" id="menu">
+        <div class="container">
+          <div class="menu-title-card">
+            <h2 class="menu-title">Our Menu</h2>
+            <p class="menu-subtitle">Discover our carefully crafted dishes!</p>
+          </div>
+          <div class="menu-category-card">
+            <h3 class="menu-category-title">Appetizers</h3>
+            <div class="menu-items">
+              <div class="menu-item">
+                <div class="item-desc">
+                  <h4>Bruscheta Italiana</h4>
+                  <p>Fresh tomatoes, basil and mozarella on toasted bread</p>
+                </div>
+                <div class="item-price">
+                  <p>$12</p>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-desc">
+                  <h4>Pizza Italiana</h4>
+                  <p>Fresh tomatoes, basil and mozarella on toasted bread</p>
+                </div>
+                <div class="item-price">
+                  <p>$15</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="container">
+          <h2 class="about-section-title">About Bella Vista</h2>
+          <div class="about-container">
+            <div class="about-text">
+              <h3>Our Story</h3>
+              <p>
+                Founded in 1985 by the Rossi Family, Bella Vista has been
+                serving authentic Italian cuisine for over three decades. Our
+                passion for traditional recipes and fresh ingredients has been
+                made us a beloved destinations for food lovers.
+              </p>
+              <p>
+                Every dish is prepared with love and attention to detail, using
+                recipes passed down through generations of Italian chefs.
+              </p>
+            </div>
+            <div class="about-image">
+              <img
+                src="images/pexels-igor-starkov-233202-1307698.jpg"
+                alt="Restaurant interior"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="container">
+          <h2 class="contact-section-title">Contact Us</h2>
+          <div class="contact-container">
+            <div class="contact-info">
+              <h3>Get In Touch</h3>
+              <strong>Address:</strong>
+              <p>123 italian street, City Center, NY 10001</p>
+              <strong>Phone:</strong>
+              <p>(555) 123 4567</p>
+              <strong>Email:</strong>
+              <p>info@bellavista.com</p>
+            </div>
+
+            <div class="contact-form">
+              <h3>Make a Reservation</h3>
+              <form name="reservation-form" class="reservation-form">
+                <div class="form-field">
+                  <label for="fullname">Full Name:</label>
+                  <input type="text" id="fullname" />
+                </div>
+
+                <div class="form-field">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" />
+                </div>
+
+                <div class="form-field">
+                  <label for="phone">Phone:</label>
+                  <input type="tel" id="phone" />
+                </div>
+
+                <div class="form-field">
+                  <label for="reservation-date">Reservation Date:</label>
+                  <input
+                    type="date"
+                    name="reservation-date"
+                    id="reservation-date"
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label for="time">Time:</label>
+                  <select name="time" id="time">
+                    <option name="time" value="">Select Time</option>
+                    <option name="time" value="12">12 Noon</option>
+                    <option name="time" value="15">3:00 PM</option>
+                    <option name="time" value="18">6:00 PM</option>
+                    <option name="time" value="21">9:00 PM</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label name="guests" id="guests">Number of Guests</label>
+                  <select name="guests" id="guests">
+                    <option name="guests" value="">How many guests?</option>
+                    <option name="guests" value="1">1</option>
+                    <option name="guests" value="2">2</option>
+                    <option name="guests" value="3">3</option>
+                    <option name="guests" value="4">4</option>
+                    <option name="guests" value="5">5+</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="request" id="request">Special Requests:</label>
+                  <textarea
+                    rows="4"
+                    cols="50"
+                    name="request"
+                    id="request"
+                    placeholder="Any special dietary request or requirements..."
+                  ></textarea>
+                </div>
+                <input
+                  class="submit-btn"
+                  type="submit"
+                  value="Submit Details"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-container">
+          <div class="footer-outro footer-section">
+            <h3>Bella Vista</h3>
+            <p>
+              Authentic Italian cuisine in the heart of the city.
+              Experience the taste of Italy in every bite.
+            </p>
+          </div>
+          <div class="footer-links footer-section">
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer-opening footer-section">
+            <h3>Opening Hours</h3>
+            <p>Monday-Thursday: 11:00 AM - 10:00 PM</p>
+            <p>Friday-Saturday: 11:00 AM -  11:00 PM</p>
+            <p>Sunday: 12:00 PM - 9:00 PM</p>
+          </div>
+          <div class="footer-follow footer-section">
+            <h3>Follow Us</h3>
+            <a href="#facebook">Facebbok</a>
+            <a href="#instagram">Instagram</a>
+            <a href="#twitter">Twitter</a>
+          </div>
+
+        </div>
+        <p class="copyright">&copy; 2025 Bella Vista Restaurant. All rights reserved.</p>
+
+      </footer>
+    </main>
+  </body>
+</html>
