@@ -1,0 +1,191 @@
+/* css file for our weather app */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-primary);
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    
+}
+
+
+
+body{
+    background-color: var(--primary-color);
+
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.units{
+    position: relative;
+}
+
+.unit-values{
+    background-color: var(--tertiary-color);
+    position: absolute;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+    right:0;
+    z-index: 1;
+}
+.unit{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--text-secondary);
+}
+.unit-name{
+    opacity: 0.5;
+
+}
+.unit-value{
+    display:flex;
+    padding: 0.5rem;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.unit-value-selected{
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255,255, 0.1);
+}
+.unit-toggle-btn{
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: var(--tertiary-color);
+    transition: all 300ms ease-in-out;
+
+}
+.unit-toggle-btn img{
+    height: 1.25rem;
+}
+.unit-toggle-btn:hover{
+    transform: scale(1.1);
+}
+
+/* hero section styling */
+.hero-section{
+    margin: 1rem;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.hero-section h1{
+    text-align: center;
+}
+
+#search-form{
+    display:flex; 
+    justify-content: center;
+    gap: 1.5rem;
+}
+.search-input{
+    position: relative;
+}
+.search-input input[type= text]{
+    background-color: var(--tertiary-color);
+    padding: 0.5rem 2.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: large;
+    background-image: url("../../assets/images/search-outline-svgrepo-com.svg");
+    background-position: 8px 8px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+
+}
+.search-suggestion{
+    display: none ;
+    z-index: 1;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    position:absolute;
+    border-radius: 0.5rem;
+    background-color: var(--tertiary-color);
+}
+
+.suggestion-items{
+    display:flex;
+    gap: 0.5rem;
+    flex-direction: column;
+
+}
+.suggestion-items>*{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    transition: all 100ms ease-in-out;
+}
+.suggestion-items>*:hover{
+    background-color: var(--text-secondary);
+
+}
+.city-name{
+    font-size: medium;
+    text-transform:capitalize;
+}
+.country-name{
+    font-size:small;
+    text-transform: capitalize;
+    opacity: 0.5;
+}
+/* .search-input:hover .search-suggestion{
+    display:block;
+} */
+
+#search-form input[type=submit]{
+    background-color: var(--secondary-color);
+    font-size: large;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 300ms ease-in-out;
+}
+#search-form input[type=submit]:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+
+:root{
+    --primary-color: rgba(1, 1,42);
+    --secondary-color: rgba(70, 87, 217);
+    --tertiary-color: rgba(37, 37, 63);
+
+    --text-primary: white;
+    --text-secondary: rgba(108,106, 123);
+    --text-black: black;
+    
+}
+
+
+
+/* media queries */
+
+@media screen and (max-width:728px ) {
+    .logo img{
+        width: 100px;
+    }
+    #search-form{
+        flex-direction: column;
+    }
+}

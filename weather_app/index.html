@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/input.css" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="logo">
+          <img src="./assets/images/logo.svg" alt="logo" />
+        </div>
+        <div class="units">
+          <div class="unit-toggle-btn">
+            <img
+              src="./assets/images/settings-gear-svgrepo-com.svg"
+              alt="setting"
+            />
+            <p>Units</p>
+            <img
+              src="./assets/images/chevron-down-svgrepo-com (2).svg"
+              alt="dropdown"
+            />
+          </div>
+          <div class="unit-values">
+            <div id="temperature" class="unit">
+              <p class="unit-name">Temperature</p>
+              <div class="unit-value">
+                <p>Celsius(&deg;C)</p>
+                <!-- <img style="width: 20px;" src="./assets/images/tick-svgrepo-com.svg" alt="tick" /> -->
+              </div>
+              <div class="unit-value">
+                <p>Fahrenheit(&deg;F)</p>
+              </div>              
+            </div>
+            <div id="Wind-speed" class="unit">
+              <p class="unit-name">Wind Speed</p>
+              <div class="unit-value">
+                <p>Km/h</p>
+              </div>
+              <div class="unit-value">
+                <p>m/s</p>
+              </div> 
+            </div>
+            <div id="precipitation" class="unit">
+              <p class="unit-name">Precipitation</p>
+              <div class="unit-value">
+                <p>Millimeters(mm)</p>
+              </div>
+              <div class="unit-value">
+                <p>Inches(in)</p>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero">
+        <div class="hero-section">
+          <h1>How's the sky looking today?</h1>
+          <form id="search-form" action="">
+            <div class="search-input">
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Search any city or location..."
+                autocomplete="off"
+                required
+              />
+              <div class="search-suggestion" id="search-suggestion">
+                <div class="suggestion-items" id="suggestion-items"></div>
+              </div>
+            </div>
+            <input type="submit" value="Search" />
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="./src/js/script.js"></script>
+  </body>
+</html>
