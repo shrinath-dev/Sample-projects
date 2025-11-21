@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/input.css" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
     <title>Weather App</title>
   </head>
   <body>
@@ -12,8 +13,8 @@
         <div class="logo">
           <img src="./assets/images/logo.svg" alt="logo" />
         </div>
-        <div class="units">
-          <div class="unit-toggle-btn">
+        <div class="units" id="units">
+          <div class="unit-toggle-btn" id="unit-toggle-btn">
             <img
               src="./assets/images/settings-gear-svgrepo-com.svg"
               alt="setting"
@@ -24,32 +25,31 @@
               alt="dropdown"
             />
           </div>
-          <div class="unit-values">
+          <div class="unit-values" id="unit-values">
             <div id="temperature" class="unit">
               <p class="unit-name">Temperature</p>
-              <div class="unit-value">
+              <div data-unit="celsius" class="unit-value">
                 <p>Celsius(&deg;C)</p>
-                <!-- <img style="width: 20px;" src="./assets/images/tick-svgrepo-com.svg" alt="tick" /> -->
               </div>
-              <div class="unit-value">
+              <div data-unit="fahrenheit" class="unit-value">
                 <p>Fahrenheit(&deg;F)</p>
               </div>              
             </div>
-            <div id="Wind-speed" class="unit">
+            <div id="wind-speed" class="unit">
               <p class="unit-name">Wind Speed</p>
-              <div class="unit-value">
+              <div data-unit="kmh" class="unit-value">
                 <p>Km/h</p>
               </div>
-              <div class="unit-value">
+              <div data-unit="ms" class="unit-value">
                 <p>m/s</p>
               </div> 
             </div>
             <div id="precipitation" class="unit">
               <p class="unit-name">Precipitation</p>
-              <div class="unit-value">
+              <div data-unit="mm" class="unit-value">
                 <p>Millimeters(mm)</p>
               </div>
-              <div class="unit-value">
+              <div data-unit="inch" class="unit-value">
                 <p>Inches(in)</p>
               </div> 
             </div>

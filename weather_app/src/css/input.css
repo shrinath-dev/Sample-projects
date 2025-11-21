@@ -27,6 +27,7 @@ body{
 }
 
 .unit-values{
+    display: none;
     background-color: var(--tertiary-color);
     position: absolute;
     padding: 0.5rem;
@@ -49,6 +50,7 @@ body{
 }
 .unit-value{
     display:flex;
+    cursor: pointer;
     padding: 0.5rem;
     justify-content: space-between;
     gap: 2rem;
@@ -59,6 +61,7 @@ body{
 }
 .unit-toggle-btn{
     display: flex;
+    cursor: pointer;
     gap: 0.5rem;
     padding: 0.75rem;
     border-radius: 0.5rem;
@@ -69,8 +72,8 @@ body{
 .unit-toggle-btn img{
     height: 1.25rem;
 }
-.unit-toggle-btn:hover{
-    transform: scale(1.1);
+.unit-toggle-btn:hover {
+    transform: translateY(-2px);
 }
 
 /* hero section styling */
