@@ -147,3 +147,45 @@ unitToggler.addEventListener('click', (e) =>{
     unitContainer.style.display = 'block';
 })
 
+//
+//
+//
+//
+//
+//
+
+// async function getCurrentCity(lat, long){
+//     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`);
+//     const result = await response.json();
+
+//     console.log(result); 
+// }
+// let lat = 28.59008
+// let long = 77.2046848
+// getCurrentCity(lat, long);
+const mainContainer = document.getElementById('container-main');
+
+if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(showPosition, error);
+} else{
+    const locationError = document.getElementById('error-geolocation');
+    const locationErrorMessage = document.getElementById('geo-error-message');
+
+    locationErrorMessage.innerText = 'your browser does not support GPS, please do a manual search to find weather forecast.';
+    mainContainer.innerText = '';
+    locationError.style.display = 'flex';
+}
+
+function error(e){
+    const locationError = document.getElementById('error-geolocation');
+    const locationErrorMessage = document.getElementById('geo-error-message');
+
+    locationErrorMessage.innerText = `${e.message}, please do a manual search to find weather forecast.`;
+    mainContainer.innerText = '';
+    locationError.style.display = 'flex';
+}
+
+function showPosition(position){
+    console.log(position.coords.latitude);
+    console.log(position.coords.longitude);
+}
