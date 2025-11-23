@@ -26,7 +26,7 @@ async function updateSearch() {
             suggestionListItem.appendChild(cityName);
             const countryName = document.createElement('p');
             countryName.classList = 'country-name';
-            countryName.innerText = `${searchSuggestion[i].country}/${searchSuggestion[i].admin1 || searchSuggestion[i].name }`;
+            countryName.innerText = `${searchSuggestion[i].country}/${searchSuggestion[i].admin1 || searchSuggestion[i].name}`;
             suggestionListItem.appendChild(countryName);
             suggestionListElement.appendChild(suggestionListItem);
         }
@@ -107,26 +107,26 @@ units.forEach(unit => {
         const uniqueId = `${unit}-${index}`;
         option.id = uniqueId;
         const optionElement = document.getElementById(uniqueId);
-        if(optionElement.dataset.unit === 'celsius' || optionElement.dataset.unit === 'kmh' || optionElement.dataset.unit === 'mm'){
+        if (optionElement.dataset.unit === 'celsius' || optionElement.dataset.unit === 'kmh' || optionElement.dataset.unit === 'mm') {
             optionElement.classList.add('unit-value-selected');
             optionElement.appendChild(tickElement);
         }
         optionElement.addEventListener('click', (e) => {
             if (optionElement.classList.contains('unit-value-selected')) return;
-            if(unit === 'temperature'){
+            if (unit === 'temperature') {
                 temperatureUnit = optionElement.dataset.unit;
-            } else if( unit === 'wind-speed'){
+            } else if (unit === 'wind-speed') {
                 windSpeedUnit = optionElement.dataset.unit;
-            }else if( unit === 'percipitation'){
+            } else if (unit === 'percipitation') {
                 percipitationUnit = optionElement.dataset.unit;
             }
             const childs = unitElement.children;
-            const desiredChild = Array.from(childs).forEach(child =>{
-                if(child.dataset.unit !== optionElement.dataset.unit){
+            const desiredChild = Array.from(childs).forEach(child => {
+                if (child.dataset.unit !== optionElement.dataset.unit) {
                     child.classList.remove('unit-value-selected');
                 }
             })
-            
+
             optionElement.classList.add('unit-value-selected');
             optionElement.appendChild(tickElement);
 
@@ -139,8 +139,8 @@ units.forEach(unit => {
 
 const unitToggler = document.getElementById('unit-toggle-btn');
 const unitContainer = document.getElementById('unit-values');
-unitToggler.addEventListener('click', (e) =>{
-    if(unitContainer.style.display === 'block'){
+unitToggler.addEventListener('click', (e) => {
+    if (unitContainer.style.display === 'block') {
         unitContainer.style.display = 'none';
         return;
     }
@@ -154,20 +154,12 @@ unitToggler.addEventListener('click', (e) =>{
 //
 //
 
-// async function getCurrentCity(lat, long){
-//     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`);
-//     const result = await response.json();
 
-//     console.log(result); 
-// }
-// let lat = 28.59008
-// let long = 77.2046848
-// getCurrentCity(lat, long);
 const mainContainer = document.getElementById('container-main');
 
-if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(showPosition, error);
-} else{
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(updateWeatherFromNavigator, error);
+} else {
     const locationError = document.getElementById('error-geolocation');
     const locationErrorMessage = document.getElementById('geo-error-message');
 
@@ -176,7 +168,7 @@ if(navigator.geolocation){
     locationError.style.display = 'flex';
 }
 
-function error(e){
+function error(e) {
     const locationError = document.getElementById('error-geolocation');
     const locationErrorMessage = document.getElementById('geo-error-message');
 
@@ -185,7 +177,160 @@ function error(e){
     locationError.style.display = 'flex';
 }
 
-function showPosition(position){
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
+async function getLocation(lat, lng) {
+    const cityName = 'new delhi';
+    const countryName = 'india';
+    try{
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
+    const result = await response.json();
+    const cityName = result.address.city || 'new delhi';
+    const countryName = result.address.country || 'india';
+    return [cityName, countryName];
+    } catch(e){
+        console.log(e);
+    }
+    return [cityName, countryName];
 }
+async function getWeatherForecast(lat, lng, time, zone) {
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,wind_speed_10m,weather_code,precipitation&timezone=${time}%2F${zone}&forecast_hours=18&temporal_resolution=hourly_3`);
+    const result = await response.json();
+    return result;
+}
+
+function getCurrentDay() {
+    let currentDate = new Date();
+    let currentWeekDay = currentDate.getDay();
+    const weekDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const weekDayName = weekDays[currentDate.getDay()];
+
+    const dateValue = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthName = months[currentDate.getMonth()];
+    return [year, monthName, weekDayName, dateValue];
+}
+
+
+async function updateWeatherFromNavigator(position) {
+    let lat = position.coords.latitude;
+    let lng = position.coords.longitude;
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const [time, zone] = timeZone.split('/');
+    const [city, country] = await getLocation(lat, lng);
+    const forecast = await getWeatherForecast(lat, lng, time, zone);
+    console.log(forecast);
+    const currentPlace = document.getElementById('current-place');
+    currentPlace.innerText = `${city}, ${country}`;
+    const [currentYear, currentMonth, currentDay, currentDate] = getCurrentDay();
+
+    const currentDD = document.getElementById('current-dd');
+    currentDD.innerText = `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear}`;
+    const currentTemp = document.getElementById('current-temp');
+    currentTemp.innerText = `${forecast.current.temperature_2m}\u00B0`;
+
+    const feelsLike = document.getElementById('feels-like');
+    feelsLike.innerText = `${forecast.current.apparent_temperature}\u00B0`;
+
+    const humidity = document.getElementById('humidity');
+    humidity.innerText = `${forecast.current.relative_humidity_2m}%`;
+    const windUnit = windSpeedUnit === 'kmh' ? 'km/h' : 'mph';
+    const wind = document.getElementById('wind');
+    wind.innerText = `${forecast.current.wind_speed_10m} ${windUnit}`;
+
+    const perUnit = percipitationUnit === 'mm' ? 'mm' : 'inches';
+    const percipitation = document.getElementById('percipitation');
+    percipitation.innerText = `${forecast.current.precipitation} ${perUnit}`;
+
+
+    const maxTempArrray = forecast.daily.temperature_2m_max;
+    const minTempArray = forecast.daily.temperature_2m_min;
+    const wmoCodeArray = forecast.daily.weather_code;
+    const dateArray = forecast.daily.time;
+    
+    const forecastArray = await dailyForecast(maxTempArrray, minTempArray, wmoCodeArray, dateArray);
+
+    const forecastsEelment = document.getElementById('forecasts');  
+    const clone = forecastsEelment.firstElementChild.cloneNode(true);
+    forecastsEelment.innerText = '';
+
+    forecastArray.forEach((item, index) =>{
+        const  clonev2 = clone.cloneNode(true);
+        const clonev3 = updateDailyForecast(item.day, item.minTemp, item.maxTemp, item.wmo, clonev2);
+        clonev3.id = `${index}-clone`;
+        forecastsEelment.append(clonev3);
+    })
+
+
+    //updating hourly services
+
+
+
+}
+
+function dateToDay( dt ){
+    const customDate = new Date(dt);
+    const weekDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const weekDayName = weekDays[customDate.getDay()];
+    return weekDayName;
+}
+
+async function getSrcImg( wmoCode ){
+    const srcImgData = await fetch('./src/data/wmo.json');
+    const imgData = await srcImgData.json();
+    return imgData[wmoCode].day.image;
+}
+
+
+async function dailyForecast(maxTempArray, minTempArray, wmoArray, dayArray){
+    
+    let forecastArray =[];
+
+    for(let i = 0; i < 7; i++){
+        const maxTemp = maxTempArray[i];
+        const minTemp = minTempArray[i];
+        const wmo = await getSrcImg(wmoArray[i]);
+        const day = dateToDay(dayArray[i]);
+        let forecast = {};
+        forecast.minTemp = minTemp;
+        forecast.maxTemp = maxTemp;
+        forecast.wmo = wmo;
+        forecast.day = day;
+        forecastArray.push(forecast);
+
+    }
+
+    return forecastArray;
+
+}
+
+function updateDailyForecast(day, min, max, code, clone){
+    const p = clone.querySelector('.day');
+    p.innerText = day;
+
+    const maxTemp = clone.querySelector('.max-temp');
+    maxTemp.innerText = `${max}\u00B0`;
+
+    const minTemp = clone.querySelector('.min-temp');
+    minTemp.innerText = `${min}\u00B0`;
+
+    const img = clone.querySelector('img');
+    img.src = code;
+
+    return clone;
+}
+
+function formatTime(){
+    
+}
+function hourlyForecast(tempArray, timeArray, wmoArray){
+    let forecastArray =[];
+
+    for(let i =0; i < 6; i++){
+        const forecast = {};
+        const temp = tempArray[i];
+        const wmo = getSrcImg(wmoArray[i]);
+        const time = 
+    }
+}
+const th = new Date("2025-11-23T22:00");
+console.log(th.getHours());
