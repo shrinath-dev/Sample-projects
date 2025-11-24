@@ -96,19 +96,19 @@
               <i id="current-temp"></i>
             </div>
             <div class="weather-variables">
-              <div  class="weather-variable">
+              <div class="weather-variable">
                 <p class="var-heading">Feels Like</p>
                 <p id="feels-like" class="var-value"></p>
               </div>
-              <div  class="weather-variable">
+              <div class="weather-variable">
                 <p class="var-heading">Humidity</p>
                 <p id="humidity" class="var-value"></p>
               </div>
-              <div  class="weather-variable">
+              <div class="weather-variable">
                 <p class="var-heading">Wind Speed</p>
                 <p id="wind" class="var-value"></p>
               </div>
-              <div  class="weather-variable">
+              <div class="weather-variable">
                 <p class="var-heading">Percipitation</p>
                 <p id="percipitation" class="var-value"></p>
               </div>
@@ -123,14 +123,6 @@
                     <p class="max-temp"></p>
                     <p class="min-temp"></p>
                   </div>
-                </div> 
-                <div class="forecast">
-                  <p class="day"></p>
-                  <img src="" alt="weather" />
-                  <div class="min-max-temp">
-                    <p class="max-temp"></p>
-                    <p class="min-temp"></p>
-                  </div>
                 </div>
                 <div class="forecast">
                   <p class="day"></p>
@@ -171,7 +163,15 @@
                     <p class="max-temp"></p>
                     <p class="min-temp"></p>
                   </div>
-                </div>   
+                </div>
+                <div class="forecast">
+                  <p class="day"></p>
+                  <img src="" alt="weather" />
+                  <div class="min-max-temp">
+                    <p class="max-temp"></p>
+                    <p class="min-temp"></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -181,7 +181,7 @@
                 <h5>Hourly forecast</h5>
                 <div id="day-selector">
                   <div class="day-toggle-btn">
-                    <p id="selected-day">Monday</p>
+                    <p id="selected-day"></p>
                     <img
                       src="./assets/images/chevron-down-svgrepo-com (2).svg"
                     />
@@ -199,61 +199,49 @@
                   </div>
                 </div>
               </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
+              <div id="hourly">
+                <div class="hour-forecast">
+                  <div class="time">
+                    <img src="" alt="time" />
+                    <p></p>
+                  </div>
+                  <p class="temp-time"></p>
                 </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
+                <div class="hour-forecast">
+                  <div class="time">
+                    <img src="" alt="time" />
+                    <p></p>
+                  </div>
+                  <p class="temp-time"></p>
                 </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
+                <div class="hour-forecast">
+                  <div class="time">
+                    <img src="" alt="time" />
+                    <p></p>
+                  </div>
+                  <p class="temp-time"></p>
                 </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
+                <div class="hour-forecast">
+                  <div class="time">
+                    <img src="" alt="time" />
+                    <p></p>
+                  </div>
+                  <p class="temp-time"></p>
                 </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
+                <div class="hour-forecast">
+                  <div class="time">
+                    <img src="" alt="time" />
+                    <p></p>
+                  </div>
+                  <p class="temp-time"></p>
                 </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
+                <div class="hour-forecast">
+                  <div class="time">
+                    <img src="" alt="time" />
+                    <p></p>
+                  </div>
+                  <p class="temp-time"></p>
                 </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
-                </div>
-                <p class="temp-time">20&deg;</p>
-              </div>
-              <div class="hour-forecast">
-                <div class="time">
-                  <img src="" alt="time" />
-                  <p>3 PM</p>
-                </div>
-                <p class="temp-time">20&deg;</p>
               </div>
             </div>
           </div>
@@ -261,7 +249,10 @@
       </section>
 
       <div id="error-geolocation">
-        <img src="./assets/images/geolocation-error.png" alt="geolocation error"/>
+        <img
+          src="./assets/images/geolocation-error.png"
+          alt="geolocation error"
+        />
         <p id="geo-error-message"></p>
       </div>
     </main>

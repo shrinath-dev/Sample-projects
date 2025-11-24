@@ -296,6 +296,9 @@ body{
 #day-selector{
     position: relative;
 }
+#selected-day{
+    text-transform: capitalize;
+}
 .day-toggle-btn{
     display: flex;
     cursor: pointer;
@@ -340,11 +343,18 @@ body{
     border-radius: 0.5rem;
     background-color: rgba(255, 255,255, 0.1);   
 }
+#hourly{
+    display: flex;
+    gap: 0.75rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .hour-forecast{
     display: flex;
+    flex-grow: 1;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     padding: 0.75rem;
     background-color: var(--text-secondary);
     border-radius: 0.5rem;
@@ -353,8 +363,11 @@ body{
 
 .time{
     display: flex;
+    align-items: center;
 }
-
+.time img{
+    width: 48px;
+}
 :root{
     --primary-color: rgba(1, 1,42);
     --secondary-color: rgba(70, 87, 217);

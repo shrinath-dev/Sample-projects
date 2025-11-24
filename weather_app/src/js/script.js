@@ -262,9 +262,25 @@ async function updateWeatherFromNavigator(position) {
 
 
     //updating hourly services
+    const selectedDay = document.getElementById('selected-day');
+    selectedDay.innerText = currentDay;
 
+    const hourlyTime = forecast.hourly.time;
+    const hourlyTemp = forecast.hourly.temperature_2m;
+    const hourlyWmo = forecast.hourly.weather_code;
 
+    const hourlyForecastArray = await hourlyForecast(hourlyTemp, hourlyTime, hourlyWmo);
 
+    const hourlyForecastElement = document.getElementById('hourly');
+    const hClone = hourlyForecastElement.firstElementChild.cloneNode(true);
+    hourlyForecastElement.innerText ='';
+
+    hourlyForecastArray.forEach((item, index)=>{
+        const clonev2 = hClone.cloneNode(true);
+        const clonev3 = updateHourlyForecast(item.time, item.temp, item.wmo, clonev2);
+        clonev3.id = `${index}-hour-clone`;
+        hourlyForecastElement.append(clonev3);
+    })
 }
 
 function dateToDay( dt ){
@@ -319,18 +335,47 @@ function updateDailyForecast(day, min, max, code, clone){
     return clone;
 }
 
-function formatTime(){
-    
+function formatTime(time){
+    const fTime = new Date(time);
+    const hour = fTime.getHours();
+
+    const interval = hour> 12 ? 'PM' : 'AM';
+    const intervalHour =  hour > 12 ? (hour%12) : hour ;
+
+    return `${intervalHour} ${interval}`;
+
 }
-function hourlyForecast(tempArray, timeArray, wmoArray){
+
+async function hourlyForecast(tempArray, timeArray, wmoArray){
     let forecastArray =[];
 
     for(let i =0; i < 6; i++){
         const forecast = {};
         const temp = tempArray[i];
-        const wmo = getSrcImg(wmoArray[i]);
-        const time = 
+        const wmo = await getSrcImg(wmoArray[i]);
+        const time =  formatTime(timeArray[i]);
+
+        forecast.temp = temp;
+        forecast.wmo = wmo;
+        forecast.time =time;
+
+        forecastArray.push(forecast);
     }
+
+    return forecastArray;
 }
-const th = new Date("2025-11-23T22:00");
-console.log(th.getHours());
+
+function updateHourlyForecast(hourlyTime, hourlyTemp, hourlyWmo, clone){
+    const time = clone.querySelector('.time');
+    const p = time.querySelector('p');
+    p.innerText = hourlyTime;
+
+    const img = time.querySelector('img');
+    img.src = hourlyWmo;
+
+    const pTemp = clone.querySelector('.temp-time');
+    pTemp.innerText = `${hourlyTemp}\u00B0`;
+
+    return clone;
+}
+
