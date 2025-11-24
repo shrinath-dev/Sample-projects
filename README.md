@@ -3,3 +3,4 @@ This repository contains my demo projects and projects that created to practice 
 
 # Here are the links of some deployed projec
 [Website Link](https://joyful-kulfi-192502.netlify.app/) The restaurant website completely made with pure HTML and CSS.
+Here is another demo project i made while learning. [weather-app-link](https://sd-weather-demo-app.netlify.app/). The website is simple weather app about temperature and forecasts.
