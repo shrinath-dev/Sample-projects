@@ -125,13 +125,62 @@ body{
     font-weight: 500;
     color: var(--text-medium);
 }
+@media screen and (max-width: 425px) {
+    .movies{
+    order: 2;
+}
+.favourite-movies{
+    order: 1;
+}
 
+}
+
+.filter-section{
+    margin-top: 20px;
+}
+.filter-section h2{
+    font-size: 1.2rem;
+}
+.genre-filter{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.genre-filter h3{
+    font-size: 1rem;
+}
+.genre-selection{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.genre-option{
+    padding: 0.25rem 0.5rem;
+    border-radius: 25px;
+    background-color: white;
+    color: var(--primary-yellow);
+    border: 1px solid var(--primary-yellow);    font-size: 0.8rem;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+.selected-genre{
+    background-color: var(--primary-yellow);
+    color: white;
+}
+.genre-option:hover{
+    opacity: 50%;
+    transform: translateY(-2px);
+}
 .movies-container{
     margin-top: 30px;
     display: grid;
     gap: 50px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
 .movies h2{
     margin-bottom: 30px;
     font-size: 1.3rem;
@@ -141,6 +190,7 @@ body{
     gap: 20px;
     grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)) ;
 }
+
 
 .fav-movie-container{
     margin-top: 30px;

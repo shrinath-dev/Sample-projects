@@ -107,17 +107,36 @@ function MovieExplorer() {
         theme === 'light' ? setTheme('dark') : setTheme('light');
     }
 
+    const movieGenere = ['All'];
+    movies.forEach((movie, index)=>{
+        movie.genre.forEach((genere) =>{
+            !movieGenere.includes(genere) && movieGenere.push(genere);
+        });
+    })
+    const [selectedGenere, setSelectedGenere] = useState('All');
+    function handleGenereSelection(value){
+        setSelectedGenere(value);
+    }
+
     //search term managment
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filteredMovies = movies.filter((movie, index) => {
+    let sortedMovies = movies.filter((movie, index) => {
         const value = searchTerm.toLowerCase();
         return movie.name.toLowerCase().includes(value) ||
             movie.director.toLowerCase().includes(value) ||
             movie.cast.some(item => item.toLowerCase() === value) ||
             movie.intro.toLowerCase().includes(value);
-    })
+    });
 
+    const genre = selectedGenere.toLowerCase();
+    if(genre !== 'all'){
+        sortedMovies = sortedMovies.filter((movie) =>{
+            return movie.genre.some(item => item.toLowerCase() === genre)
+        })
+    }
+
+    
     function handleSearchReset(){
         setSearchTerm('');
     }
@@ -151,10 +170,27 @@ function MovieExplorer() {
                 </button>
             </div>
 
+            <div className='filter-section'>
+                <h2 className={`${theme === 'light' ? 'light-text' : 'dark-text'}`}>Filters</h2>
+                <div className="genre-filter">
+                    <h3 className={`${theme === 'light' ? 'light-text' : 'dark-text'}`}>Genere:</h3>
+                    <div className="genre-selection">
+                        {
+                            movieGenere.map((genre, index) =>{
+                                return(
+                                    <span onClick={()=>handleGenereSelection(genre)} className={`genre-option ${selectedGenere === genre && 'selected-genre'}`}>{genre}</span>
+                                )
+                            })
+                        }
+                    </div>
+
+                </div>
+            </div>
+
             {
                 searchTerm !=='' && (
                     <div className="search-results">
-                        <p>{filteredMovies.length} results for "{searchTerm}"</p>
+                        <p>{sortedMovies.length} results for "{searchTerm}" {selectedGenere !=='All' && ` in ${selectedGenere} category`}</p>
                     </div>
                 )
             }
@@ -165,8 +201,8 @@ function MovieExplorer() {
                     <h2 className={`${theme === 'light' ? 'light-text' : 'dark-text'}`}>Movies</h2>
                     <div className='movies-grid'>
                         {
-                            filteredMovies.length >0 ? (
-                                filteredMovies.map((movie, index) => {
+                            sortedMovies.length >0 ? (
+                                sortedMovies.map((movie, index) => {
                                 return (
                                     <MovieCard favlist={favlist} handleFavlist={handleFavlist} key={index} colorTheme={theme} {...movie} />
                                 )
