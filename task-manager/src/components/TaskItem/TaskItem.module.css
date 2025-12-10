@@ -1,0 +1,168 @@
+/* css for task items */
+
+.taskContainer{
+    max-width: 600px;
+    width: 100%;
+    background-color: var(--color-bg-secondary);
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.completed{
+    text-decoration: line-through;
+    text-decoration-color: var(--color-text-muted);
+}
+.taskMeta{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color:var(--color-text-muted);
+}
+
+.taskItemHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.taskItemHeader h2{
+    font-size: 1.5rem;
+    color: var(--color-text);
+    text-transform: capitalize;
+}
+
+.taskItemHeader p{
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    text-transform: capitalize;
+    border-radius: 25px;
+}
+
+.taskDescription{
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+.taskActions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+.taskActions>button{
+    background-color: var(--color-primary);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+.taskActions>p{
+    font-size: 0.7rem;
+    color: var(--color-text);
+}
+
+.taskEditActions{
+    /* width: 100%; */
+    max-width: 300px;
+    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.editBtn, .deleteBtn{
+    font-weight:600 ;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+.editBtn{
+    background-color: var(--color-accent);
+}
+.editBtn:disabled{
+    cursor: not-allowed;
+}
+.deleteBtn{
+    background-color: red;
+}
+
+
+
+
+
+.taskContainer h2{
+    color: var(--color-text);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.taskContainer form{
+    background-color: var(--color-bg-secondary);
+    max-width: 600px;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.formGroup label{
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+.formGroup input, .formGroup textarea, .formGroup select{
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid var(--color-border);
+}
+
+.formBtn{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.formBtn>.submitBtn{
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.formBtn>.cancelBtn{
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+}

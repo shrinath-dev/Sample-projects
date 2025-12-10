@@ -1,0 +1,23 @@
+/* css for  task list */
+
+
+.tasksGrid{
+    padding-top:30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--color-surface);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.tasksGrid h2{
+    margin-top: 10px;
+    color: var(--color-text);
+}
+
+.noTask{
+    color: var(--color-text-muted);
+}

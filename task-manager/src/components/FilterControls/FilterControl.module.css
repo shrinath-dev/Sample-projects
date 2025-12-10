@@ -1,0 +1,39 @@
+/* css for filter control */
+
+
+.filterContainer{
+    max-width: 1000px;
+    padding-top: 30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: var(--color-surface);
+
+}
+
+.filterContainer>p{
+    font-size: 1rem;
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.filterItems{
+    display: flex;
+    gap: 15px;
+}
+
+.filterItem{
+    text-transform: capitalize;
+    padding: 0.75rem 1rem;
+    background-color: white;
+    color: black;
+    border: 1px solid var(--color-border);
+    border-radius: 25px;
+    cursor: pointer;
+}
+.selectedFilter{
+    background-color: var(--color-accent);
+}

@@ -1,0 +1,20 @@
+/* css for task search */
+.searchContainer{
+    max-width: 1000px;
+    padding-top: 30px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-surface);
+}
+
+.searchContainer input{
+    max-width: 600px;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    outline: none;
+    border-radius: 25px;
+    font-size: 1rem;
+}
