@@ -276,6 +276,9 @@ function TaskProvider({ children }) {
     // console.log(state);
     const value = {
         tasks: filteredTask,
+        totalTasks: state.tasks.length,
+        pendingTasks: state.tasks.filter((task) => !task.isCompleted).length,
+        completedTasks: state.tasks.filter(task => task.isCompleted).length,
         canUndo: canUndo,
         searchTerm: state.searchTerm,
         filter: state.filter,

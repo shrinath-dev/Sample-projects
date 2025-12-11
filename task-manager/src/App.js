@@ -8,6 +8,7 @@ import { useThemeContext } from "./contexts/ThemeContext/ThemeContext";
 import TaskSearch from "./components/TaskSearch/TaskSearch";
 import FilterControl from "./components/FilterControls/FilterControls";
 import UndoActions from "./components/UndoActions/UndoActions";
+import TaskStats from "./components/TaskStats/TaskStats";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 </header>
                 <main>
                     <TaskForm />
+                    <TaskStats />
                     <TaskSearch />
                     <FilterControl />
                     <TaskList />
