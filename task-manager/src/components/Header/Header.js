@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import styles from './Header.module.css';
 import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
 
