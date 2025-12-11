@@ -137,13 +137,11 @@ const ACTIONS = {
 const taskReducer = (state, action) => {
 
     const saveToHistory = (currentState) => {
-        console.log(currentState);
         return ({
             ...currentState,
-            history: [currentState, ...currentState.history.slice(0, 9)],
+            history: [state, ...currentState.history.slice(0, 9)],
         })
     }
-
     switch (action.type) {
         case ACTIONS.ADD_TASK:
             const newTask = {
@@ -158,7 +156,7 @@ const taskReducer = (state, action) => {
             }
             return saveToHistory({
                 ...state,
-                tasks: [...state.tasks, newTask]
+                tasks: [newTask, ...state.tasks]
             });
 
         case ACTIONS.DELETE_TASK:
@@ -183,7 +181,7 @@ const taskReducer = (state, action) => {
             });
 
         case ACTIONS.TOGGLE_TASK:
-            return ({
+            return saveToHistory({
                 ...state,
                 tasks: state.tasks.map((task) => {
                     if (task.id === action.payload) {

@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import { useThemeContext } from "./contexts/ThemeContext/ThemeContext";
 import TaskSearch from "./components/TaskSearch/TaskSearch";
 import FilterControl from "./components/FilterControls/FilterControls";
+import UndoActions from "./components/UndoActions/UndoActions";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                     <TaskSearch />
                     <FilterControl />
                     <TaskList />
+                    <UndoActions />
                 </main>
             </div>
         </TaskProvider>

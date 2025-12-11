@@ -84,8 +84,8 @@ function TaskItem({ task }) {
                     </div>
 
                     <div className={styles.formBtn}>
-                        <button className={styles.submitBtn} type='submit'>Submit</button>
                         <button onClick={() => setIsEditing(false)} type="button" className={styles.cancelBtn} >Cancel</button>
+                        <button className={styles.submitBtn} type='submit'>Submit</button>
                     </div>
                 </form>
             </div>

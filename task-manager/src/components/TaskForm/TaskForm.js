@@ -37,6 +37,7 @@ function TaskForm() {
             description: '',
             priority: 'medium',
         })
+        setShowForm(false);
 
     }
 
