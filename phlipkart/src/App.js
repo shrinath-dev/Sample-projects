@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
-
+import React from "react";
+import { useThemeContext } from "./context";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Header } from "./components";
+import { HomePage, ProductsPage } from "./pages";
 
 function App() {
+  const { theme } = useThemeContext();
 
-  useEffect(() => {
-    console.log('i am called');
-    fetch('https://fakestoreapi.com/users')
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }, [])
 
   return (
-    <header>
-      <h1>Phlipkart</h1>
-    </header>
+    <BrowserRouter>
+      <header data-theme={theme}>
+        <Header />
+      </header>
+      <Routes>
+        <Route index={true} element={<HomePage />} />
+        <Route path='/products' element={<ProductsPage />} />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 
