@@ -1,18 +1,25 @@
-.cartStatusContainer{
+.cartStatusContainer {
     display: flex;
     position: relative;
-    width: fit-content
+    width: fit-content;
 }
 
-.cartStatusContainer img{
+.cartIcon {
     width: 32px;
+    filter: invert(50%) sepia(9%) saturate(897%) hue-rotate(176deg)
+        brightness(97%) contrast(88%);
+    cursor: pointer;
 }
 
-.cartStatusContainer p{
+.cartValue {
+    font-size: 0.8rem;
+    font-weight: bold;
+    width: 1rem;
+    height: 1rem;
     position: absolute;
     padding: 0.1rem 0.2rem;
-    top:0;
-    right: -1rem;
+    top: 0;
+    right: -0.5px;
     background-color: var(--brand-yellow-dark);
     border-radius: 50%;
 }

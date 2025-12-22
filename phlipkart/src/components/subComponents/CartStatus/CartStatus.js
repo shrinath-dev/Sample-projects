@@ -1,19 +1,15 @@
 import React from "react";
-import styles from './CartStatus.module.css';
-import { useDispatch, useSelector } from 'react-redux'
+import styles from "./CartStatus.module.css";
+import { useSelector } from "react-redux";
 
 function CartStatus() {
-
-    const cartValue = useSelector((state) => (state.cart.cartLength));
-    const dispatch = useDispatch();
-    return (
-        <div className={styles.cartStatusContainer} >
-            <img src='./cart-icon.svg' alt='cart' />
-            <p>{cartValue}</p>
-        </div>
-    );
-
-
+  const cartValue = useSelector((state) => state.cart.cartLength);
+  return (
+    <div className={styles.cartStatusContainer}>
+      <img className={styles.cartIcon} src="./cart-icon.svg" alt="cart" />
+      {cartValue !== 0 && <p className={styles.cartValue}>{cartValue}</p>}
+    </div>
+  );
 }
 
 export default CartStatus;

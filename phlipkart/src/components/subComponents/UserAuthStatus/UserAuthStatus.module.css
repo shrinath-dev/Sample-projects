@@ -1,0 +1,19 @@
+.userStatusContainer {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.userIcon {
+    width: clamp(1rem, 10vw, 2rem);
+    filter: invert(50%) sepia(9%) saturate(897%) hue-rotate(176deg)
+        brightness(97%) contrast(88%);
+}
+
+.userStatusContainer p {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    cursor: pointer;
+    color: var(--text-primary);
+}

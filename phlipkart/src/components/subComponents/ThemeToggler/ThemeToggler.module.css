@@ -1,0 +1,8 @@
+.toggleContainer {
+    display: flex;
+}
+
+.toggleContainer > img {
+    width: 32px;
+    cursor: pointer;
+}

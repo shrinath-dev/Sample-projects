@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(1rem, 5vw, 2rem);
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.logo {
+    width: 100%;
+    max-width: 200px;
+    min-width: 50px;
+    height: auto;
+}
+
+.headerInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+}
+.cartTheme {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 400px) {
+    .header > img {
+        display: none;
+    }
+    .headerInfo {
+        width: 100%;
+    }
+}
