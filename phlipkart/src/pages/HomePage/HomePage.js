@@ -1,9 +1,25 @@
 import React from "react";
+import styles from "./HomePage.module.css";
+import { useThemeContext } from "../../context";
+import { Carousel } from "../../components";
 
 function HomePage() {
+  const { theme } = useThemeContext();
+
+  const heroImagesSrc = [
+    "./header-image-1.webp",
+    "./header-image-2.webp",
+    "./header-image-3.webp",
+  ];
   return (
-    <div>
-      <h2>Home Page</h2>
+    <div data-theme={theme} className={styles.homePageContainer}>
+      <section className={styles.heroSection}>
+        <Carousel autoSlide={true}>
+          {heroImagesSrc.map((imageSrc, index) => (
+            <img src={imageSrc} key={index} alt="hero-image" />
+          ))}
+        </Carousel>
+      </section>
     </div>
   );
 }
