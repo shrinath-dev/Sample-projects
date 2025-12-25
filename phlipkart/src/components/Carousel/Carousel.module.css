@@ -7,10 +7,7 @@
 
 .slidesContainer {
     display: flex;
-    transform: translateX(0);
-    transition-property: translate;
-    transition-timing-function: ease-out;
-    transition-duration: 500ms;
+    transition: transform 500ms ease-out;
 }
 .slidesContainer > * {
     width: 100%;

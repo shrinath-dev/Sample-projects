@@ -1,3 +1,7 @@
 .homePageContainer {
     background-color: var(--bg-primary);
 }
+
+.heroSection {
+    padding: 2rem 0rem 0rem;
+}

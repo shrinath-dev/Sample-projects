@@ -14,12 +14,14 @@ function HomePage() {
   return (
     <div data-theme={theme} className={styles.homePageContainer}>
       <section className={styles.heroSection}>
-        <Carousel autoSlide={true}>
+        <Carousel>
           {heroImagesSrc.map((imageSrc, index) => (
             <img src={imageSrc} key={index} alt="hero-image" />
           ))}
         </Carousel>
       </section>
+
+      <section className={styles.productsSection}></section>
     </div>
   );
 }

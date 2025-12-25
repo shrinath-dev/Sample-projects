@@ -1,19 +1,48 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  createAsyncThunk,
+  createEntityAdapter,
+  createSelector,
+} from "@reduxjs/toolkit";
 
-const initialState = {
-    products: [],
-}
+const productAdapter = createEntityAdapter();
 
-export const productSlice = createSlice({
-    name: 'products',
-    initialState,
-    reducers: {
-        getProducts: (state, action) => {
-            console.log('fetching products')
-        }
-    }
+const initialState = productAdapter.getInitialState({
+  status: "idle",
 });
 
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const response = await fetch("https://fakestoreapi.com/product");
+    const products = await response.json();
 
-export const { getProducts } = productSlice.actions;
+    return products;
+  },
+);
+
+export const productSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers: {
+    getProductById: (state, action) => {
+      console.log(action.payload);
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        productAdapter.setAll(state, action.payload);
+        state.status = "idle";
+      })
+      .addCase(fetchProducts.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        console.log(action.error.message);
+      });
+  },
+});
+
+export const { getProductById } = productSlice.actions;
 export default productSlice.reducer;
