@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
 import styles from "./HomePage.module.css";
 import { useThemeContext } from "../../context";
-import { Carousel } from "../../components";
+import { Carousel, ProductCard } from "../../components";
 
 import { selectProducts, fetchProducts } from "../../features/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function HomePage() {
   const { theme } = useThemeContext();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [])
+  }, [dispatch])
 
   const products = useSelector(selectProducts);
-  const dispatch = useDispatch();
   console.log(products);
 
   const heroImagesSrc = [
@@ -33,18 +32,14 @@ function HomePage() {
       </section>
 
       <section className={styles.productsSection}>
-        <h2>All Products</h2>
-        {
-          products.map(product => (
-            <div key={product.id}>
-              <h3>{product.title}</h3>
-              <p>{product.price}</p>
-              <img src={product.image} alt='product-image' />
-              <p>{product.category}</p>
-              <p>{product.description}</p>
-            </div>
-          ))
-        }
+        <h2 className={styles.heading}>All Products</h2>
+        <div className={styles.productGrid}>
+          {
+            products.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          }
+        </div>
       </section>
     </div>
   );
