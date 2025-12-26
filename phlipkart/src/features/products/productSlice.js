@@ -14,7 +14,7 @@ const initialState = productAdapter.getInitialState({
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = await fetch("https://fakestoreapi.com/product");
+    const response = await fetch("https://fakestoreapi.com/products");
     const products = await response.json();
 
     return products;
@@ -43,6 +43,10 @@ export const productSlice = createSlice({
       });
   },
 });
+
+// creating selectors
+
+export const { selectAll: selectProducts, selectById: selectProductsById } = productAdapter.getSelectors(state => state.products);
 
 export const { getProductById } = productSlice.actions;
 export default productSlice.reducer;
