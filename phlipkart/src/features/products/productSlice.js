@@ -4,6 +4,7 @@ import {
   createEntityAdapter,
   createSelector,
 } from "@reduxjs/toolkit";
+import { getCategory, getSearchTerm } from "../filters/filterSlice";
 
 const productAdapter = createEntityAdapter();
 
@@ -50,6 +51,22 @@ export const getCategories = createSelector(
   selectProducts,
   (products) => products.map((product) => product.category)
 )
+
+export const getFilteredProducts = createSelector(
+  selectProducts,
+  getCategory,
+
+  (products, category) => products.filter((product) => product.category === category || category === 'all')
+)
+
+export const productSearchResults = createSelector(
+  getFilteredProducts,
+  getSearchTerm,
+
+  (products, term) => (products.filter((product) => product.title.toLowerCase().includes(term.toLowerCase())
+    || product.description.toLowerCase().includes(term.toLowerCase())
+    || product.category.toLowerCase().includes(term.toLowerCase()))
+  ))
 
 // export const {} = productSlice.actions;
 export default productSlice.reducer;

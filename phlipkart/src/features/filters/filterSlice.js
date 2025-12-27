@@ -21,7 +21,7 @@ const filterSlice = createSlice({
 })
 
 export const getCategory = createSelector(state => state.filter, filter => filter.category);
-export const getSearchTerm = createSelector(state => state.filter, term => term.searchTerm);
+export const getSearchTerm = createSelector(state => state.filter, filter => filter.searchTerm);
 
 export const { setSearchTerm, setCategory } = filterSlice.actions;
 export default filterSlice.reducer;
