@@ -48,10 +48,7 @@ export const { selectAll: selectProducts, selectById: selectProductsById } = pro
 
 export const getCategories = createSelector(
   selectProducts,
-
   (products) => products.map((product) => product.category)
-
-
 )
 
 // export const {} = productSlice.actions;

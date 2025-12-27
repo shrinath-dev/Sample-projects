@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./HomePage.module.css";
 import { useThemeContext } from "../../context";
-import { Carousel, ProductCard } from "../../components";
+import { Carousel, ProductCard, FilterByCategory } from "../../components";
 
 import { selectProducts, fetchProducts } from "../../features/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +31,10 @@ function HomePage() {
             <img src={imageSrc} key={index} alt="hero-image" />
           ))}
         </Carousel>
+      </section>
+
+      <section className={styles.filterSection}>
+        <FilterByCategory />
       </section>
 
       <section className={styles.productsSection}>
