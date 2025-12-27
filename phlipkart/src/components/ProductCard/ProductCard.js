@@ -19,9 +19,9 @@ function ProductCard({ product }) {
                     </div>
                     <span className={styles.ratingCount}>({product.rating.count})</span>
                 </div>
-                <p className={styles.pDescription}>
+                {/* <p className={styles.pDescription}>
                     {product.description}
-                </p>
+                </p> */}
                 <div className={styles.cardFooter}>
                     <p className={styles.pPrice}>$ {product.price}</p>
                     <div className={styles.paddToCart}>

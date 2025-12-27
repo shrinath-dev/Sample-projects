@@ -14,7 +14,6 @@ function HomePage() {
   }, [dispatch])
 
   const products = useSelector(selectProducts);
-  console.log(products);
 
   const heroImagesSrc = [
     "./header-image-1.webp",
