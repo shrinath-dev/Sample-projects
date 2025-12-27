@@ -14,7 +14,8 @@ function HomePage() {
   }, [dispatch])
 
   const products = useSelector(selectProducts);
-
+  const fetchStatus = useSelector(state => state.products.status);
+  console.log(fetchStatus);
   const heroImagesSrc = [
     "./header-image-1.webp",
     "./header-image-2.webp",
@@ -32,15 +33,32 @@ function HomePage() {
 
       <section className={styles.productsSection}>
         <h2 className={styles.heading}>All Products</h2>
-        <div className={styles.productGrid}>
-          {
-            products.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))
-          }
-        </div>
-      </section>
-    </div>
+        {
+          fetchStatus === 'loading' ? (
+
+            <div className={styles.loaderContainer}>
+              <div className={styles.loader}></div>
+              <p className={styles.loadingText}>Loading Products...</p>
+            </div>
+          ) : (
+            fetchStatus === 'failed' ? (
+              <div className={styles.fetchError}>
+                <p className={styles.errorMsg}>Failed to load product, please try again</p>
+              </div>
+            ) : (
+              <div className={styles.productGrid}>
+                {
+                  products.map(product => (
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                }
+              </div>
+            )
+
+          )
+        }
+      </section >
+    </div >
   );
 }
 
