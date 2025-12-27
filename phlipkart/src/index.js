@@ -8,13 +8,13 @@ import { store } from "./store/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <ThemeProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ThemeProvider>
-    </AuthProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <AuthProvider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
+  </AuthProvider>
+  // </React.StrictMode>,
 );

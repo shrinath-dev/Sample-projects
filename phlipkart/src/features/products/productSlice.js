@@ -25,7 +25,6 @@ export const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-
   },
   extraReducers: (builder) => {
     builder
@@ -47,5 +46,13 @@ export const productSlice = createSlice({
 
 export const { selectAll: selectProducts, selectById: selectProductsById } = productAdapter.getSelectors(state => state.products);
 
-export const { } = productSlice.actions;
+export const getCategories = createSelector(
+  selectProducts,
+
+  (products) => products.map((product) => product.category)
+
+
+)
+
+// export const {} = productSlice.actions;
 export default productSlice.reducer;

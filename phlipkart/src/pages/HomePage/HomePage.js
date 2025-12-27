@@ -13,6 +13,8 @@ function HomePage() {
     dispatch(fetchProducts());
   }, [dispatch])
 
+
+
   const products = useSelector(selectProducts);
   const fetchStatus = useSelector(state => state.products.status);
   console.log(fetchStatus);
