@@ -1,9 +1,22 @@
 import React from "react";
 import styles from './ProductCard.module.css';
 import { FiStar, FiShoppingCart } from "react-icons/fi";
+import { addToCart } from "../../../features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 function ProductCard({ product }) {
+
+    const dispatch = useDispatch();
+
+    const productMeta = {
+        id: product.id,
+        quantity: 1,
+    }
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(productMeta));
+    }
 
     return (
         <div className={styles.productCardContainer}>
@@ -25,7 +38,7 @@ function ProductCard({ product }) {
                 <div className={styles.cardFooter}>
                     <p className={styles.pPrice}>$ {product.price}</p>
                     <div className={styles.paddToCart}>
-                        <button className={styles.addToCartBtn}>
+                        <button onClick={() => handleAddToCart()} className={styles.addToCartBtn}>
                             <p>Add to cart</p>
                             <FiShoppingCart className={styles.cartIcon} />
                         </button>
