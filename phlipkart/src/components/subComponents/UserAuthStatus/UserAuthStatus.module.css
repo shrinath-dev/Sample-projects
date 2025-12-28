@@ -4,16 +4,20 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .userIcon {
+    text-decoration: none;
     width: clamp(1rem, 10vw, 2rem);
     filter: invert(50%) sepia(9%) saturate(897%) hue-rotate(176deg)
         brightness(97%) contrast(88%);
 }
 
-.userStatusContainer p {
-    font-size: clamp(1rem, 4vw, 1.5rem);
+.login{
+    text-decoration: none;
+    font-size: clamp(0.75rem, 4vw, 1rem);
     cursor: pointer;
     color: var(--text-primary);
+    text-decoration: none;
 }

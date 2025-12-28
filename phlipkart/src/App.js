@@ -2,7 +2,7 @@ import React from "react";
 import { useThemeContext } from "./context";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components";
-import { HomePage, ProductsPage } from "./pages";
+import { HomePage, ProductsPage, LoginPage } from "./pages";
 
 function App() {
   const { theme } = useThemeContext();
@@ -15,6 +15,7 @@ function App() {
       <main>
         <Routes>
           <Route index={true} element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<ProductsPage />} />
         </Routes>
       </main>
