@@ -1,0 +1,42 @@
+.formContainer{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 5vw, 2rem);
+    padding-top:0;
+    width: 100%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+input[type=text], input[type=password]{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+
+.icon{
+    width: 24px;
+    filter: invert(50%) sepia(9%) saturate(897%) hue-rotate(176deg)
+        brightness(97%) contrast(88%);
+}
+
+.formGroup{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5rem;
+    padding: 1rem 1rem;
+    background-color: var(--bg-tertiary);
+}
