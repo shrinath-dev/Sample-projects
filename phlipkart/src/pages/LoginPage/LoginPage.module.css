@@ -5,6 +5,44 @@
     padding-top: 2rem;
 }
 
+.back{
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 500px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+a{
+    text-decoration: none;
+}
+.icon{
+    width: 24px;
+    height: 24px;
+    filter: invert(50%) sepia(9%) saturate(897%) hue-rotate(176deg)
+        brightness(97%) contrast(88%);
+}
+
+.backBtn{
+    cursor: pointer;
+    font-size: 1rem;
+    color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: var(--brand-yellow);
+    transition: all 200ms ease-in-out;
+}
+.backBtn:hover{
+    background-color: var(--brand-yellow-dark);
+    transform: scale(1.05);
+}
+
 .loginForm{
     background-color: var(--bg-secondary);
     margin: 0 auto;
