@@ -1,5 +1,6 @@
 .formContainer{
     display: flex;
+    flex-direction: column;
     gap: 1.5rem;
     justify-content: center;
     align-items: center;
@@ -71,4 +72,11 @@ input:not(:focus):valid ~ .label{
     font-weight: 600;
     border-radius: 2rem ;
     background-color: var(--brand-blue);
+}
+
+.error{
+    color: whitesmoke;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: color-mix(in srgb, red 30%, transparent 70% );
 }

@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 function UserAuthStatus() {
   const { user, isLoggedIn } = useAuthContext();
   return (
-    <Link to='/login'><div className={styles.userStatusContainer}>
+    <div className={styles.userStatusContainer}>
       <img className={styles.userIcon} src="./user-icon.svg" alt="user-icon" />
       {isLoggedIn ? (
         <p className={styles.logout}>Logout</p>
       ) : (
-        <p className={styles.login}>Login</p>
+        <Link to='/login'><p className={styles.login}>Login</p></Link>
       )}
-    </div></Link>
+    </div>
   );
 }
 

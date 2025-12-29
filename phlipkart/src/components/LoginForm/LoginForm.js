@@ -4,16 +4,19 @@ import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BiSolidHide } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
-
+import { useAuthContext } from "../../context/AuthContext/AuthContext";
 
 
 function LoginForm() {
+
+    const { loginUser, loginError } = useAuthContext();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
     })
 
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
 
     const handleChange = (name, value) => {
@@ -24,13 +27,18 @@ function LoginForm() {
     }
 
 
-    const handleSubmit = () => {
-        // later 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        loginUser(formData);
+        setFormData({
+            username: '',
+            password: '',
+        })
     }
 
     return (
         <div className={styles.formContainer}>
-            <form name="login" className={styles.form} onSubmit={handleSubmit}>
+            <form name="login" className={styles.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.formGroup}>
                     <FaUser className={styles.icon} />
                     <input autoComplete="true" name="username" id="username" type="text" value={formData.username}
@@ -55,6 +63,14 @@ function LoginForm() {
 
                 <button className={styles.submitBtn} type='submit'>Login</button>
             </form>
+
+            {
+                loginError && (
+                    <div className={styles.error}>
+                        {loginError}
+                    </div>
+                )
+            }
         </div>
     )
 };
