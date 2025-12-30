@@ -23,6 +23,7 @@ const initialState = {
 const ACTIONS = {
     'SET_USER': 'SET_USER',
     'SET_ERROR': 'SET_ERROR',
+    'UNSET_USER': 'UNSET_USER',
 };
 
 const authReducer = (state, action) => {
@@ -47,6 +48,14 @@ const authReducer = (state, action) => {
                 ...state,
                 loginError: `${action.payload} Please use "test" as username and "test@123" as password this is a demo app`
             }
+
+        case ACTIONS.UNSET_USER:
+            return saveToLocalStorage({
+                ...state,
+                currentUser: null,
+                isLoggedIn: false,
+                loginError: null,
+            })
         default:
             console.log(action);
             return state;
@@ -78,11 +87,16 @@ function AuthProvider({ children }) {
 
         dispatch({ type: ACTIONS.SET_USER, payload: userData });
     }
+
+    const logoutUser = () => {
+        dispatch({ type: ACTIONS.UNSET_USER });
+    }
     const value = {
         user: state.currentUser,
         isLoggedIn: state.isLoggedIn,
         loginError: state.loginError,
         loginUser,
+        logoutUser,
 
     }
     return (

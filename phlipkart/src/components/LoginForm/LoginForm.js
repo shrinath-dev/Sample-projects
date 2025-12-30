@@ -5,10 +5,10 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { BiSolidHide } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
 import { useAuthContext } from "../../context/AuthContext/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-
+    const navigate = useNavigate();
     const { loginUser, loginError } = useAuthContext();
     const [formData, setFormData] = useState({
         username: '',
@@ -34,6 +34,7 @@ function LoginForm() {
             username: '',
             password: '',
         })
+        navigate('/');
     }
 
     return (

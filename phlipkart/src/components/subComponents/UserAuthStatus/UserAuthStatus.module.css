@@ -14,7 +14,7 @@
         brightness(97%) contrast(88%);
 }
 
-.login{
+.login, .logout, .username{
     text-decoration: none;
     font-size: clamp(0.75rem, 4vw, 1rem);
     cursor: pointer;

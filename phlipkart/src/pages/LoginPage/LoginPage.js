@@ -9,6 +9,7 @@ function LoginPage() {
 
     const { theme } = useThemeContext();
 
+
     return (
         <div data-theme={theme} className={styles.loginPageContainer}>
             <div className={styles.back}>
