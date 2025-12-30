@@ -68,7 +68,10 @@ function AuthProvider({ children }) {
         const savedState = localStorage.getItem('user');
         if (savedState) {
             const user = JSON.parse(savedState).currentUser;
-            loginUser(user);
+            if (user) {
+                loginUser(user);
+            }
+
         }
     }, [])
 

@@ -5,5 +5,6 @@ import FilterByCategory from "./FilterByCategory/FilterByCategory";
 import SearchProduct from "./SearchProduct/SearchProduct";
 import ProductGrid from "./ProductGrid/ProductGrid";
 import LoginForm from "./LoginForm/LoginForm";
+import Cart from "./Cart/Cart";
 
-export { Header, Footer, Carousel, FilterByCategory, SearchProduct, ProductGrid, LoginForm };
+export { Header, Footer, Carousel, FilterByCategory, SearchProduct, ProductGrid, LoginForm, Cart };

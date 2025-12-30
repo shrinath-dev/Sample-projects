@@ -1,4 +1,10 @@
 .header {
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 20000;
+    /* top: 0;
+    right:0;
+    left:0; */
     display: flex;
     gap: 3rem;
     justify-content: space-between;
@@ -16,6 +22,7 @@
 }
 
 .headerInfo {
+    position: relative;
     display: flex;
     justify-content: space-between;
     gap: 2rem;

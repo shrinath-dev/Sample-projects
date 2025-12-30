@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css';
 import { useThemeContext } from "./context";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components";

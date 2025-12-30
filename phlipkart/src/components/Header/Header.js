@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import { UserAuthStatus, CartStatus, ThemeToggler } from "../subComponents";
+import Cart from "../Cart/Cart";
 
 function Header() {
   return (
@@ -10,6 +11,7 @@ function Header() {
         <UserAuthStatus />
         <div className={styles.cartTheme}>
           <CartStatus />
+          <Cart />
           <ThemeToggler />
         </div>
       </div>
