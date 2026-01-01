@@ -7,7 +7,6 @@ const initialState = cartAdapter.getInitialState({
 })
 
 
-
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
@@ -20,6 +19,12 @@ export const cartSlice = createSlice({
             cartAdapter.addOne(state, action.payload);
 
         },
+        removeFromCart: (state, action) => {
+            if (state.ids.includes(action.payload)) {
+                cartAdapter.removeOne(state, action.payload);
+            }
+            return;
+        },
 
         setCartVisibility: (state, action) => {
             state.showCart = !state.showCart;
@@ -27,7 +32,7 @@ export const cartSlice = createSlice({
     },
 });
 
-export const { selectAll: selectCartItems, selectById: selectCartItemId } = cartAdapter.getSelectors(state => state.cart);
+export const { selectAll: selectCartItems, selectById: selectCartItemById } = cartAdapter.getSelectors(state => state.cart);
 
 //to get total items incart
 export const getCartLength = createSelector(
@@ -44,5 +49,11 @@ export const getCartVisibility = createSelector(
     },
 )
 
-export const { addToCart, setCartVisibility } = cartSlice.actions;
+export const isInCart = (id) => createSelector(
+    state => state.cart,
+    id,
+    (items, id) => (items.ids.includes(id)),
+)
+
+export const { addToCart, setCartVisibility, removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

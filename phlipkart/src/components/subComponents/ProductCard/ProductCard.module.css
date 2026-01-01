@@ -119,6 +119,27 @@
 .addToCartBtn:hover{
     background-color: var(--brand-blue-dark);
 }
+
+.removeFromCartBtn{
+    display: flex;
+    font-size: 0.9rem;
+    font-weight: 600;
+    word-spacing: -4px;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+    border:none;
+    outline: none;
+    background-color: var(--brand-yellow);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+.removeFromCartBtn:hover{
+    background-color: var(--brand-yellow-dark);
+}
+
 .cartIcon{
     width: 24px;
     height: 24px;
