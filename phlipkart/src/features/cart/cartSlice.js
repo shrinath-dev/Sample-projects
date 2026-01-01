@@ -3,7 +3,9 @@ import { createSlice, createEntityAdapter, createSelector } from "@reduxjs/toolk
 const cartAdapter = createEntityAdapter();
 
 const initialState = cartAdapter.getInitialState({
-    showCart: false,
+    cartExtra: {
+        showCart: false,
+    },
 })
 
 
@@ -25,9 +27,15 @@ export const cartSlice = createSlice({
             }
             return;
         },
+        increaseQuantity: (state, action) => {
+            cartAdapter.updateOne(state, { id: action.payload.id, changes: action.payload.changes });
+        },
+        decreaseQuantity: (state, action) => {
+            cartAdapter.updateOne(state, { id: action.payload.id, changes: action.payload.changes })
+        },
 
         setCartVisibility: (state, action) => {
-            state.showCart = !state.showCart;
+            state.cartExtra.showCart = !state.cartExtra.showCart;
         }
     },
 });
@@ -45,7 +53,7 @@ export const getCartVisibility = createSelector(
     state => state.cart,
 
     (cart) => {
-        return cart.showCart;
+        return cart.cartExtra.showCart;
     },
 )
 
@@ -55,5 +63,6 @@ export const isInCart = (id) => createSelector(
     (items, id) => (items.ids.includes(id)),
 )
 
-export const { addToCart, setCartVisibility, removeFromCart } = cartSlice.actions;
+
+export const { addToCart, setCartVisibility, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

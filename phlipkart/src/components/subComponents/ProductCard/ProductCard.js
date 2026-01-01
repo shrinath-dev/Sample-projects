@@ -13,6 +13,7 @@ function ProductCard({ product }) {
     const productMeta = {
         id: product.id,
         quantity: 1,
+        price: product.price,
     }
     const id = () => product.id;
 
