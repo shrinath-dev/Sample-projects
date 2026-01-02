@@ -47,7 +47,7 @@ function Cart() {
                     <p className={styles.totalValue}>${cartTotal.toFixed(2)}</p>
                 </div>
 
-                <button disabled={cartItems.length === 0 ? 'true' : 'false'} className={styles.checkoutBtn}>
+                <button disabled={cartItems.length === 0 ? true : false} className={styles.checkoutBtn}>
                     Checkout
                     <FaArrowRightLong />
                 </button>

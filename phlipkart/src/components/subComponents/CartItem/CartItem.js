@@ -5,6 +5,8 @@ import { selectProductsById } from "../../../features/products/productSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { IoMdAddCircle } from "react-icons/io";
 import { AiFillMinusCircle } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
+
 
 
 function CartItem({ itemId }) {
@@ -52,7 +54,8 @@ function CartItem({ itemId }) {
                 <p>${product.price}</p>
             </div>
             <div className={styles.itemTotal}>
-                <p>${(item.quantity * product.price).toFixed(2)}</p>
+                <p className={styles.totalPrice}>${(item.quantity * product.price).toFixed(2)}</p>
+                <MdDelete className={styles.delIcon} onClick={() => dispatch(removeFromCart(itemId))} />
             </div>
         </div>
     )
