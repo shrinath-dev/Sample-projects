@@ -1,13 +1,16 @@
 import React, { useMemo } from "react";
 import styles from './Cart.module.css';
-import { useSelector } from "react-redux";
-import { getCartLength, getCartVisibility, selectCartItems } from "../../features/cart/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { getCartLength, getCartVisibility, selectCartItems, setCartVisibility } from "../../features/cart/cartSlice";
 import { CartItem } from "../subComponents";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Cart() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const showCart = useSelector(getCartVisibility);
     const cartLength = useSelector(getCartLength);
     const cartItems = useSelector(selectCartItems);
@@ -15,6 +18,10 @@ function Cart() {
         return cartItems.reduce((total, item) => { return (total + (item.quantity * item.price)) }, 0)
     }, [cartItems]);
 
+    const handleNavigation = () => {
+        dispatch(setCartVisibility());
+        navigate('/checkout');
+    }
     if (!showCart) return;
     return (
         <div className={styles.cartContainer}>
@@ -47,7 +54,7 @@ function Cart() {
                     <p className={styles.totalValue}>${cartTotal.toFixed(2)}</p>
                 </div>
 
-                <button disabled={cartItems.length === 0 ? true : false} className={styles.checkoutBtn}>
+                <button disabled={cartItems.length === 0 ? true : false} onClick={handleNavigation} className={styles.checkoutBtn}>
                     Checkout
                     <FaArrowRightLong />
                 </button>

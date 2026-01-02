@@ -1,7 +1,6 @@
 import HomePage from "./HomePage/HomePage";
-import ProductsPage from "./ProductsPage/ProductsPage";
 import LoginPage from "./LoginPage/LoginPage";
+import CheckoutPage from "./CheckoutPage/CheckoutPage";
 
 
-
-export { HomePage, ProductsPage, LoginPage };
+export { HomePage, LoginPage, CheckoutPage };

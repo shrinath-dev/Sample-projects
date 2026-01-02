@@ -3,7 +3,7 @@ import './App.css';
 import { useThemeContext } from "./context";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components";
-import { HomePage, ProductsPage, LoginPage } from "./pages";
+import { HomePage, LoginPage, CheckoutPage } from "./pages";
 
 function App() {
   const { theme } = useThemeContext();
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route index={true} element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
         </Routes>
       </main>
       <footer data-theme={theme}>
