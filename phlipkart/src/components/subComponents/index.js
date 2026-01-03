@@ -4,5 +4,6 @@ import ThemeToggler from "./ThemeToggler/ThemeToggler";
 import ProductCard from "./ProductCard/ProductCard";
 import CartItem from "./CartItem/CartItem";
 import OrderItem from "./OrderItem/OrderItem";
+import PaymentMethod from "./PaymentMethod/PaymentMethod";
 
-export { UserAuthStatus, CartStatus, ThemeToggler, ProductCard, CartItem, OrderItem };
+export { UserAuthStatus, CartStatus, ThemeToggler, ProductCard, CartItem, OrderItem, PaymentMethod };

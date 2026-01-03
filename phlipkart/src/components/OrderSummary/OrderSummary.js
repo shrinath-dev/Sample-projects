@@ -3,7 +3,8 @@ import styles from './OrderSummary.module.css';
 import { useSelector } from "react-redux";
 import { selectCartItems } from "../../features/cart/cartSlice";
 import { Link } from "react-router-dom";
-import { OrderItem } from "../subComponents";
+import { OrderItem, PaymentMethod } from "../subComponents";
+
 function OrderSummary({ data }) {
 
     const cart = useSelector(selectCartItems);
@@ -40,11 +41,23 @@ function OrderSummary({ data }) {
             </div>
 
             <div className={styles.shipping}>
-                <p className={styles.shippingLabel}>Shipping Address :</p>
+                <div className={styles.shippingMethod}>
+                    <span className={styles.shippingLabel}>Shipping Address </span>
+
+                    {
+                        data.pincode === '' ? '' : (
+                            <span className={styles.shippingType}>
+                                Free Shipping
+                            </span>
+
+                        )
+
+                    }
+                </div>
 
                 {
                     (data.address1 === '' && data.address2 === '') ? (
-                        <p className={styles.noAddress}>Please provide address.</p>
+                        <p className={styles.noAddress}>Please provide address to view shipping options.</p>
                     ) : (
                         <div className={styles.address} >
                             <p>
@@ -59,7 +72,7 @@ function OrderSummary({ data }) {
                             </p>
                             <p>
                                 {
-                                    data.postcode && data.postcode
+                                    data.pincode && data.pincode
                                 }
                             </p>
                             <p>
@@ -73,6 +86,16 @@ function OrderSummary({ data }) {
                 }
 
             </div>
+
+            <div className={styles.payment}>
+                <PaymentMethod />
+            </div>
+
+            <div className={styles.contactInfo}>
+
+            </div>
+
+
 
         </div>
     )

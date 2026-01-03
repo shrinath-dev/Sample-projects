@@ -62,8 +62,8 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                     <label className={styles.label} htmlFor='pincode' >Postcode*</label>
                     <input
                         type='text'
-                        name='postcode'
-                        value={customerData.postcode}
+                        name='pincode'
+                        value={customerData.pincode}
                         onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                     />
                 </div>

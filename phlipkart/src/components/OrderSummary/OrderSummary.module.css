@@ -54,6 +54,22 @@
     font-size: 1rem;
     color: var(--text-primary);
 }
+
+.shippingMethod{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shippingType{
+    background-color: var(--brand-yellow-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    
+}
+
 .noAddress{
     color: var(--text-secondary);
     font-size: 0.9rem;
@@ -62,4 +78,10 @@
     line-height: 1.6;
 color: var(--text-secondary);
     font-size: 0.8rem;
+}
+
+
+.payment{
+    padding: 1rem;
+    border-bottom: 1px solid var(--text-secondary);
 }
