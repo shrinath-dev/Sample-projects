@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import styles from './CheckoutPage.module.css';
 import { useSelector } from 'react-redux';
 import { getCartLength, selectCartItems } from "../../features/cart/cartSlice";
-import { CustomerDetailForm } from '../../components'
+import { CustomerDetailForm, OrderSummary } from '../../components'
+import { useThemeContext } from "../../context";
+
 
 function CheckoutPage() {
 
+    const { theme } = useThemeContext();
     const cartLength = useSelector(getCartLength);
     const cart = useSelector(selectCartItems);
 
@@ -44,7 +47,7 @@ function CheckoutPage() {
             if (!emialRegex.test(value)) {
                 setError({
                     ...error,
-                    email: 'please enter a valid email'
+                    email: 'Please Enter a Valid Email Address'
                 })
             } else {
                 setError({
@@ -59,7 +62,7 @@ function CheckoutPage() {
             if (checkValue.length !== 10) {
                 setError({
                     ...error,
-                    phone: 'please enter a valid phone number',
+                    phone: 'Please Enter a Valid Phone Number',
                 })
             } else {
                 setError({
@@ -71,10 +74,14 @@ function CheckoutPage() {
     }
 
     return (
-        <div className={styles.checkoutPageContainer}>
+        <div data-theme={theme} className={styles.checkoutPageContainer}>
             <div className={styles.checkoutContainer}>
                 <div className={styles.customerDetailForm}>
                     <CustomerDetailForm customerData={formData} errorState={error} changeCustomerData={handleChange} />
+                </div>
+
+                <div className={styles.summaryContainer}>
+                    <OrderSummary data={formData} />
                 </div>
             </div>
         </div>

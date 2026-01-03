@@ -1,0 +1,20 @@
+.orderItem{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.itemName{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.price{
+    color: var(--text-secondary);
+    font-size:1rem;
+}

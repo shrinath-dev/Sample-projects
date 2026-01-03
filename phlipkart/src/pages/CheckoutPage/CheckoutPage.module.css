@@ -1,0 +1,12 @@
+.checkoutPageContainer{
+    background-color: var(--bg-primary);
+    padding-top: 2rem;
+}
+
+.checkoutContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 1rem;
+    justify-content:center;
+    align-items: center;
+}

@@ -1,0 +1,65 @@
+.orderSummaryContainer{
+    background-color: var(--bg-tertiary);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.heading{
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+.cartSummary{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--text-secondary);
+}
+
+.empty{
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 1rem;
+}
+.link{
+    text-decoration: none;
+    color: var(--brand-yellow-dark);
+}
+
+.cartTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--text-secondary);
+}
+
+.cartTotal>p{
+    font-size: 1rem;
+    color: var(--text-primary);
+
+}
+
+.shipping{
+    padding: 1rem;
+    border-bottom: 1px solid var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.shippingLabel{
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+.noAddress{
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.address{
+    line-height: 1.6;
+color: var(--text-secondary);
+    font-size: 0.8rem;
+}

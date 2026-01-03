@@ -7,5 +7,9 @@ import ProductGrid from "./ProductGrid/ProductGrid";
 import LoginForm from "./LoginForm/LoginForm";
 import Cart from "./Cart/Cart";
 import CustomerDetailForm from "./CustomerDetailForm/CustomerDetailForm";
+import OrderSummary from "./OrderSummary/OrderSummary";
 
-export { Header, Footer, Carousel, FilterByCategory, SearchProduct, ProductGrid, LoginForm, Cart, CustomerDetailForm };
+export {
+    Header, Footer, Carousel, FilterByCategory, SearchProduct,
+    ProductGrid, LoginForm, Cart, CustomerDetailForm, OrderSummary
+};

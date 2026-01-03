@@ -16,7 +16,7 @@
     width: 100%;
 }
 
-input[type=text], input[type=password]{
+input[id=password], input[id=username]{
     background-color: transparent;
     border: none;
     outline: none;

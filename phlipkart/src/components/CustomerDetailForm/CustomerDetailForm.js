@@ -6,10 +6,10 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
     const [checked, setChecked] = useState(true);
     return (
         <div className={styles.formContainer}>
-            <form id='customer-detail' name='customer-detail'>
-                <div className={styles.formGroup}>
+            <form id='customer-detail' className={styles.customerDetail} name='customer-detail'>
+                <div className={styles.nameGroup}>
                     <div className={styles.formGroup}>
-                        <label htmlFor='firstName' >First Name*</label>
+                        <label className={styles.label} htmlFor='firstName' >First Name*</label>
                         <input
                             type='text'
                             name='firstName'
@@ -18,7 +18,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         />
                     </div>
                     <div className={styles.formGroup}>
-                        <label htmlFor='lastName' >Last Name (optional)</label>
+                        <label className={styles.label} htmlFor='lastName' >Last Name (optional)</label>
                         <input
                             type='text'
                             name='lastName'
@@ -29,7 +29,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor='country'>Country*</label>
+                    <label className={styles.label} htmlFor='country'>Country*</label>
                     <input
                         type='text'
                         name='country'
@@ -39,7 +39,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor='address1' >Addrese Line 1*</label>
+                    <label className={styles.label} htmlFor='address1' >Addrese Line 1*</label>
                     <input
                         type='text'
                         name='address1'
@@ -49,7 +49,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor='address2' >Addrese Line 2(optional)</label>
+                    <label className={styles.label} htmlFor='address2' >Addrese Line 2(optional)</label>
                     <input
                         type='text'
                         name='address2'
@@ -59,7 +59,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor='pincode' >Postcode*</label>
+                    <label className={styles.label} htmlFor='pincode' >Postcode*</label>
                     <input
                         type='text'
                         name='postcode'
@@ -69,7 +69,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor='phone' >Phone*</label>
+                    <label className={styles.label} htmlFor='phone' >Phone*</label>
                     <input
                         type='text'
                         name='phone'
@@ -82,7 +82,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor='email' >Email Address*</label>
+                    <label className={styles.label} htmlFor='email' >Email Address*</label>
                     <input
                         type='email'
                         name='email'
@@ -94,7 +94,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                     }
                 </div>
 
-                <div className={styles.formGroup}>
+                <div className={styles.checkbox}>
                     <input
                         type='checkbox'
                         name='marketing'
@@ -102,7 +102,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         onChange={() => setChecked(prev => !prev)}
                         value='choosen'
                     />
-                    <label htmlFor='marketing'>Sign me up for email updates and news(optional).</label>
+                    <label className={styles.label} htmlFor='marketing'>Sign me up for email updates and news(optional).</label>
                 </div>
             </form>
         </div>

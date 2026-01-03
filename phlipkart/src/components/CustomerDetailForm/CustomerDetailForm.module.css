@@ -2,4 +2,58 @@
     display: grid;
     grid-template-columns: 1fr;
     padding: 1rem;
+    justify-content: left;
+    /* background-color: var(--bg-secondary); */
+}
+
+.customerDetail{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.formGroup{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.formGroup > input{
+    width: 100%;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 1rem;
+    color: var(--text-primary);
+}
+
+.formGroup>input:focus{
+    border: 1px solid var(--brand-yellow);
+}
+
+.error{
+    position: absolute;
+    color: rgb(224, 75, 75);
+    top: 100%;
+    left: 1rem;
+    text-transform: capitalize;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+.nameGroup{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.checkbox{
+    display: flex;
+    gap: 1rem;
+}
+
+.label{
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 }
