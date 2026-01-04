@@ -36,6 +36,9 @@ export const cartSlice = createSlice({
 
         setCartVisibility: (state, action) => {
             state.cartExtra.showCart = !state.cartExtra.showCart;
+        },
+        clearCart: (state, action) => {
+            cartAdapter.removeAll(state);
         }
     },
 });
@@ -64,5 +67,5 @@ export const isInCart = (id) => createSelector(
 )
 
 
-export const { addToCart, setCartVisibility, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
+export const { addToCart, setCartVisibility, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

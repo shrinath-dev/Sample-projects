@@ -1,10 +1,17 @@
 .userStatusContainer {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    
     text-decoration: none;
+}
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
 }
 
 .userIcon {
@@ -20,4 +27,13 @@
     cursor: pointer;
     color: var(--text-primary);
     text-decoration: none;
+}
+
+.shopIcon{
+    width: 24px;
+    height: 24px;
+}
+.homeLink{
+    text-decoration: none;
+    color: var(--text-primary);
 }

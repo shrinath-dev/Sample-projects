@@ -16,6 +16,10 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                             value={customerData.firstName}
                             onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                         />
+
+                        {
+                            (errorState.firstName !== '') && <div id='firstName-error' className={styles.error}>{errorState.firstName}</div>
+                        }
                     </div>
                     <div className={styles.formGroup}>
                         <label className={styles.label} htmlFor='lastName' >Last Name (optional)</label>
@@ -36,6 +40,9 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         value={customerData.country}
                         onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                     />
+                    {
+                        (errorState.country !== '') && <div id='country-error' className={styles.error}>{errorState.country}</div>
+                    }
                 </div>
 
                 <div className={styles.formGroup}>
@@ -46,6 +53,9 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         value={customerData.address1}
                         onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                     />
+                    {
+                        (errorState.address1 !== '') && <div id='address1-error' className={styles.error}>{errorState.address1}</div>
+                    }
                 </div>
 
                 <div className={styles.formGroup}>
@@ -66,6 +76,9 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         value={customerData.pincode}
                         onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                     />
+                    {
+                        (errorState.pincode !== '') && <div id="pincode-error" className={styles.error}>{errorState.pincode}</div>
+                    }
                 </div>
 
                 <div className={styles.formGroup}>
@@ -77,7 +90,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                     />
                     {
-                        (errorState.phone !== '') && <div className={styles.error}>{errorState.phone}</div>
+                        (errorState.phone !== '') && <div id='phone-error' className={styles.error}>{errorState.phone}</div>
                     }
                 </div>
 
@@ -90,7 +103,7 @@ function CustomerDetailForm({ customerData, errorState, changeCustomerData }) {
                         onChange={(e) => changeCustomerData(e.target.name, e.target.value)}
                     />
                     {
-                        (errorState.email !== '') && <div className={styles.error}>{errorState.email}</div>
+                        (errorState.email !== '') && <div id='email-error' className={styles.error}>{errorState.email}</div>
                     }
                 </div>
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styles from './Cart.module.css';
 import { useSelector, useDispatch } from "react-redux";
-import { getCartLength, getCartVisibility, selectCartItems, setCartVisibility } from "../../features/cart/cartSlice";
+import { getCartLength, getCartVisibility, selectCartItems, setCartVisibility, clearCart } from "../../features/cart/cartSlice";
 import { CartItem } from "../subComponents";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -50,8 +50,11 @@ function Cart() {
                 </div>
 
                 <div className={styles.summary}>
-                    <p className={styles.grandTotal}>Grand Total:</p>
-                    <p className={styles.totalValue}>${cartTotal.toFixed(2)}</p>
+                    <button disabled={cartItems.length === 0 ? true : false} onClick={() => dispatch(clearCart())} className={styles.clearBtn}>Clear Cart</button>
+                    <div className={styles.total}>
+                        <p className={styles.grandTotal}>Grand Total:</p>
+                        <p className={styles.totalValue}>${cartTotal.toFixed(2)}</p>
+                    </div>
                 </div>
 
                 <button disabled={cartItems.length === 0 ? true : false} onClick={handleNavigation} className={styles.checkoutBtn}>

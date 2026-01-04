@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styles from './CheckoutPage.module.css';
-import { useSelector } from 'react-redux';
-import { getCartLength, selectCartItems } from "../../features/cart/cartSlice";
 import { CustomerDetailForm, OrderSummary } from '../../components'
 import { useThemeContext } from "../../context";
 
@@ -9,8 +7,7 @@ import { useThemeContext } from "../../context";
 function CheckoutPage() {
 
     const { theme } = useThemeContext();
-    const cartLength = useSelector(getCartLength);
-    const cart = useSelector(selectCartItems);
+
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -25,10 +22,8 @@ function CheckoutPage() {
 
     const [error, setError] = useState({
         firstName: '',
-        lastName: '',
         country: '',
         address1: '',
-        address2: '',
         pincode: '',
         email: '',
         phone: '',
@@ -40,6 +35,14 @@ function CheckoutPage() {
             [name]: value,
         })
 
+        if (name !== 'lastName' && name !== 'address2' && name !== 'email' && name !== 'phone') {
+            if (value.length > 1) {
+                setError({
+                    ...error,
+                    [name]: '',
+                })
+            }
+        }
         //setting error messages
         // email validation
         if (name === 'email') {
@@ -73,6 +76,37 @@ function CheckoutPage() {
         }
     }
 
+    const handleError = (name, value) => {
+        setError(err => ({
+            ...err,
+            [name]: value,
+        }))
+    }
+
+    const resetAll = () => {
+        setError(err => ({
+            ...err,
+            firstName: '',
+            country: '',
+            address1: '',
+            pincode: '',
+            email: '',
+            phone: '',
+        }));
+
+        setFormData(data => ({
+            ...data,
+            firstName: '',
+            lastName: '',
+            country: '',
+            address1: '',
+            address2: '',
+            pincode: '',
+            email: '',
+            phone: '',
+        }))
+    }
+
     return (
         <div data-theme={theme} className={styles.checkoutPageContainer}>
             <div className={styles.checkoutContainer}>
@@ -81,7 +115,7 @@ function CheckoutPage() {
                 </div>
 
                 <div className={styles.summaryContainer}>
-                    <OrderSummary data={formData} />
+                    <OrderSummary data={formData} errors={error} changeErrror={handleError} reset={resetAll} />
                 </div>
             </div>
         </div>
