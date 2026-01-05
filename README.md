@@ -12,3 +12,7 @@ Here is another demo project i made while learning.
 Here is another demo project i made while learning.
 [Movies-Explorer-Link](https://sd-movies-explorer.netlify.app/). A component driven React app showcasing search, filtering, theming, and favourites logic.
 Built entirely with static JSON data for pure UI and state-management practice.
+
+Here is another major project I developed as part of my React learning journey: Phlipkart, a small but functional API-driven e-commerce application.
+While building this project, I learned and applied key React ecosystem concepts such as Redux Toolkit, Context API, React Router, and React Redux. I also focused on clean folder organization, scalable project structure, and creating an accessible and user-friendly UI.
+[Phlipkart-Ecom-App](https://sd-phlipkart.netlify.app/)
