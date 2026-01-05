@@ -16,7 +16,6 @@ function LoginForm() {
     })
 
     const [showPassword, setShowPassword] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
 
     const handleChange = (name, value) => {
