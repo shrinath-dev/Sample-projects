@@ -5,14 +5,21 @@ import { BookOpenText, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function LoginForm() {
+export default function SingupForm() {
   const router = useRouter();
   const [data, setData] = useState({
+    fullName: "",
     email: "",
     password: "",
+    passwordMatch: "",
   });
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({
+    fullName: null,
+    email: null,
+    password: null,
+    passwordMatch: null,
+  });
 
   const [show, setShow] = useState(false);
 
@@ -38,13 +45,26 @@ export default function LoginForm() {
           </div>
 
           <div>
-            <h2 className="text-2xl sm:text-3xl mb-2">Welcome back</h2>
+            <h2 className="text-2xl sm:text-3xl mb-2">Create an account</h2>
             <p className="text-sm sm:text-lg text-muted-foreground">
-              Enter your credentials to access your reading dashboard
+              Enter your information to get started with BookRead
             </p>
           </div>
         </div>
         <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm" htmlFor="fullName">
+              Full Name
+            </label>
+            <input
+              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              type="text"
+              name="fullName"
+              value={data.fullName}
+              onChange={(e) => handleChange(e.target.name, e.target.value)}
+              placeholder="John Doe"
+            />
+          </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm" htmlFor="email">
               Email
@@ -85,24 +105,46 @@ export default function LoginForm() {
             </div>
           </div>
 
+          <div className="flex flex-col gap-1">
+            <label className="text-sm" htmlFor="passwordMatch">
+              Confirm Password
+            </label>
+            <input
+              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              type="text"
+              name="passwordMatch"
+              value={data.passwordMatch}
+              onChange={(e) => handleChange(e.target.name, e.target.value)}
+              placeholder="Re-Enter your password"
+            />
+          </div>
+
           <button
             type="submit"
             disabled={
               !(
-                error === null &&
-                Boolean(data.email.trim() && data.password.trim())
+                error.email === null &&
+                error.fullName === null &&
+                error.password === null &&
+                error.passwordMatch === null &&
+                Boolean(
+                  data.email.trim() &&
+                    data.password.trim() &&
+                    data.fullName.trim() &&
+                    data.passwordMatch.trim()
+                )
               )
             }
             className="bg-primary text-center text-sm rounded-lg p-2 cursor-pointer text-muted disabled:cursor-not-allowed disabled:bg-primary/20"
           >
-            Sign In
+            Sign Up
           </button>
         </form>
 
         <p className="text-sm text-center mt-3">
-          Don't have an account?{" "}
-          <Link className="text-primary" href="/signup">
-            Sign up
+          Already have an account?{" "}
+          <Link className="text-primary" href="/login">
+            Sign In
           </Link>
         </p>
       </div>
