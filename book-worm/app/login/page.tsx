@@ -1,11 +1,14 @@
-import { LoginForm } from "../uiComponents";
+import { GoBack, LoginForm } from "../uiComponents";
 import Image from "next/image";
 
 export default function loginPage() {
   return (
     <section className="mx-auto">
       <div className="grid md:grid-cols-2 gap-4 justify-center items-center">
-        <div className="p-2 md:p-5 min-h-screen flex justify-center items-center">
+        <div className="p-2 md:p-5 flex flex-col justify-center items-center">
+          <div className="self-start mb-4">
+            <GoBack />
+          </div>
           <LoginForm />
         </div>
 
