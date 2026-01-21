@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { BookOpenText, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { SignUpSchema } from "@/app/lib/validationSchema";
 
 export default function SingupForm() {
   const router = useRouter();
@@ -28,6 +29,8 @@ export default function SingupForm() {
       ...prev,
       [name]: value,
     }));
+    console.log(data.fullName);
+    console.log(SignUpSchema.safeParse(data));
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -129,9 +132,9 @@ export default function SingupForm() {
                 error.passwordMatch === null &&
                 Boolean(
                   data.email.trim() &&
-                    data.password.trim() &&
-                    data.fullName.trim() &&
-                    data.passwordMatch.trim()
+                  data.password.trim() &&
+                  data.fullName.trim() &&
+                  data.passwordMatch.trim(),
                 )
               )
             }
