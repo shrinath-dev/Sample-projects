@@ -1,37 +1,70 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState, useRef } from "react";
 import { BookOpenText, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SignUpSchema } from "@/app/lib/validationSchema";
+import { SignupDataSchema } from "@/app/lib/inputValidationSchema";
+import { SignupData } from "@/app/lib/userDefinedTypes";
 
 export default function SingupForm() {
+  const ref = useRef<keyof SignupData<string>>(null);
   const router = useRouter();
-  const [data, setData] = useState({
-    fullName: "",
+  const [show, setShow] = useState(false);
+  const [userData, setUserData] = useState<SignupData<string>>({
+    fullname: "",
+    username: "",
     email: "",
     password: "",
-    passwordMatch: "",
+    confirm: "",
   });
 
-  const [error, setError] = useState({
-    fullName: null,
-    email: null,
-    password: null,
-    passwordMatch: null,
+  const [error, setError] = useState<SignupData<string[]>>({
+    fullname: [],
+    username: [],
+    email: [],
+    password: [],
+    confirm: [],
   });
-
-  const [show, setShow] = useState(false);
 
   const handleChange = (name: string, value: string) => {
-    setData((prev) => ({
+    setUserData((prev) => ({
       ...prev,
       [name]: value,
     }));
-    console.log(data.fullName);
-    console.log(SignUpSchema.safeParse(data));
+
+    ref.current = name as keyof SignupData<string>;
   };
+
+  const handleError = (name: string, value: string[]) => {
+    setError((prev) => ({
+      ...prev,
+      [name]: [...value],
+    }));
+  };
+
+  useEffect(() => {
+    if (ref.current === null) return;
+    let val: keyof SignupData<string> = ref.current;
+    if (userData[val] === "") {
+      handleError(val, []);
+      return;
+    }
+    let result = SignupDataSchema.safeParse(userData);
+    if (result.success) {
+      handleError(val, []);
+    }
+
+    if (result.error) {
+      let issuesArray: string[] = [];
+      for (let issue of result.error.issues) {
+        if (issue.path[0] === val) issuesArray.push(issue.message);
+      }
+      handleError(val, issuesArray);
+    }
+
+    console.log(result);
+  }, [userData]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -56,17 +89,47 @@ export default function SingupForm() {
         </div>
         <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="text-sm" htmlFor="fullName">
+            <label className="text-sm" htmlFor="fullname">
               Full Name
             </label>
             <input
               className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
               type="text"
-              name="fullName"
-              value={data.fullName}
+              name="fullname"
+              value={userData.fullname}
               onChange={(e) => handleChange(e.target.name, e.target.value)}
               placeholder="John Doe"
             />
+
+            <div>
+              {error.fullname &&
+                error.fullname.map((err) => (
+                  <div key={err}>
+                    <p>{err}</p>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm" htmlFor="username">
+              Username
+            </label>
+            <input
+              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              type="text"
+              name="username"
+              value={userData.username}
+              onChange={(e) => handleChange(e.target.name, e.target.value)}
+              placeholder="user_123"
+            />
+            <div>
+              {error.username &&
+                error.username.map((err) => (
+                  <div key={err}>
+                    <p>{err}</p>
+                  </div>
+                ))}
+            </div>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm" htmlFor="email">
@@ -76,7 +139,7 @@ export default function SingupForm() {
               className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
               type="email"
               name="email"
-              value={data.email}
+              value={userData.email}
               onChange={(e) => handleChange(e.target.name, e.target.value)}
               placeholder="example@email.com"
             />
@@ -96,7 +159,7 @@ export default function SingupForm() {
                 className="border-none outline-none w-full"
                 name="password"
                 type={show ? "text" : "password"}
-                value={data.password}
+                value={userData.password}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
                 placeholder="********"
               />
@@ -109,14 +172,14 @@ export default function SingupForm() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm" htmlFor="passwordMatch">
+            <label className="text-sm" htmlFor="confirm">
               Confirm Password
             </label>
             <input
               className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
               type="text"
-              name="passwordMatch"
-              value={data.passwordMatch}
+              name="confirm"
+              value={userData.confirm}
               onChange={(e) => handleChange(e.target.name, e.target.value)}
               placeholder="Re-Enter your password"
             />
@@ -126,15 +189,15 @@ export default function SingupForm() {
             type="submit"
             disabled={
               !(
-                error.email === null &&
-                error.fullName === null &&
-                error.password === null &&
-                error.passwordMatch === null &&
+                error.email.length === 0 &&
+                error.fullname.length === 0 &&
+                error.password.length === 0 &&
+                error.confirm.length === 0 &&
                 Boolean(
-                  data.email.trim() &&
-                  data.password.trim() &&
-                  data.fullName.trim() &&
-                  data.passwordMatch.trim(),
+                  userData.email.trim() &&
+                  userData.password.trim() &&
+                  userData.fullname.trim() &&
+                  userData.confirm.trim(),
                 )
               )
             }
