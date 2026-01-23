@@ -1,14 +1,18 @@
 "use client";
 
 import { FormEvent, useEffect, useState, useRef } from "react";
-import { BookOpenText, Eye, EyeOff } from "lucide-react";
+import { BookOpenText, Eye, EyeOff, CircleAlert } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SignupDataSchema } from "@/app/lib/inputValidationSchema";
+import {
+  SignupDataSchema,
+  ConfirmPasswordSchema,
+} from "@/app/lib/inputValidationSchema";
 import { SignupData } from "@/app/lib/userDefinedTypes";
 
 export default function SingupForm() {
   const ref = useRef<keyof SignupData<string>>(null);
+  const inputDelay = 500;
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [userData, setUserData] = useState<SignupData<string>>({
@@ -36,34 +40,68 @@ export default function SingupForm() {
     ref.current = name as keyof SignupData<string>;
   };
 
-  const handleError = (name: string, value: string[]) => {
+  const handleError = (name: keyof SignupData<string[]>, value: string[]) => {
     setError((prev) => ({
       ...prev,
-      [name]: [...value],
+      [name]: value,
     }));
   };
 
   useEffect(() => {
-    if (ref.current === null) return;
-    let val: keyof SignupData<string> = ref.current;
-    if (userData[val] === "") {
-      handleError(val, []);
-      return;
-    }
-    let result = SignupDataSchema.safeParse(userData);
-    if (result.success) {
-      handleError(val, []);
-    }
-
-    if (result.error) {
-      let issuesArray: string[] = [];
-      for (let issue of result.error.issues) {
-        if (issue.path[0] === val) issuesArray.push(issue.message);
+    const t = setTimeout(() => {
+      if (ref.current === null) return;
+      let val: keyof SignupData<string> = ref.current;
+      if (userData[val] === "") {
+        handleError(val, []);
+        return;
       }
-      handleError(val, issuesArray);
-    }
 
-    console.log(result);
+      if (val === "confirm" || val === "password") {
+        let result = ConfirmPasswordSchema.safeParse(userData);
+        if (result.success) {
+          setError((prev) => ({
+            ...prev,
+            password: [],
+            confirm: [],
+          }));
+        }
+
+        if (result.error) {
+          let issuesArray: string[] = [];
+          for (let issue of result.error.issues) {
+            if (issue.path[0] === val) issuesArray.push(issue.message);
+          }
+          handleError(val, issuesArray);
+        }
+
+        return;
+      }
+
+      let result = SignupDataSchema.safeParse(userData);
+
+      if (result.success) {
+        setError((prev) => ({
+          ...prev,
+          fullname: [],
+          username: [],
+          email: [],
+          password: [],
+          confirm: [],
+        }));
+      }
+
+      if (result.error) {
+        let issuesArray: string[] = [];
+        for (let issue of result.error.issues) {
+          if (issue.path[0] === val) issuesArray.push(issue.message);
+        }
+        handleError(val, issuesArray);
+      }
+    }, 300);
+
+    return () => {
+      clearTimeout(t);
+    };
   }, [userData]);
 
   const handleSubmit = (e: FormEvent) => {
@@ -93,7 +131,7 @@ export default function SingupForm() {
               Full Name
             </label>
             <input
-              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              className={`border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary ${error.fullname.length !== 0 ? "border-error-state" : "border-border"}`}
               type="text"
               name="fullname"
               value={userData.fullname}
@@ -101,10 +139,14 @@ export default function SingupForm() {
               placeholder="John Doe"
             />
 
-            <div>
+            <div className="flex flex-col gap-2">
               {error.fullname &&
                 error.fullname.map((err) => (
-                  <div key={err}>
+                  <div
+                    className=" flex gap-4 border rounded border-error-state text-error-state bg-error-state/10 py-2 px-4 animate-pulse "
+                    key={err}
+                  >
+                    <CircleAlert />
                     <p>{err}</p>
                   </div>
                 ))}
@@ -115,17 +157,21 @@ export default function SingupForm() {
               Username
             </label>
             <input
-              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              className={`border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary ${error.username.length !== 0 ? "border-error-state" : "border-border"}`}
               type="text"
               name="username"
               value={userData.username}
               onChange={(e) => handleChange(e.target.name, e.target.value)}
               placeholder="user_123"
             />
-            <div>
+            <div className="flex flex-col gap-2">
               {error.username &&
                 error.username.map((err) => (
-                  <div key={err}>
+                  <div
+                    className=" flex gap-4 border rounded border-error-state text-error-state bg-error-state/10 py-2 px-4 animate-pulse "
+                    key={err}
+                  >
+                    <CircleAlert />
                     <p>{err}</p>
                   </div>
                 ))}
@@ -136,13 +182,25 @@ export default function SingupForm() {
               Email
             </label>
             <input
-              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              className={`border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary ${error.email.length !== 0 ? "border-error-state" : "border-border"}`}
               type="email"
               name="email"
               value={userData.email}
               onChange={(e) => handleChange(e.target.name, e.target.value)}
               placeholder="example@email.com"
             />
+            <div className="flex flex-col gap-2">
+              {error.email &&
+                error.email.map((err) => (
+                  <div
+                    className=" flex gap-4 border rounded border-error-state text-error-state bg-error-state/10 py-2 px-4 animate-pulse "
+                    key={err}
+                  >
+                    <CircleAlert />
+                    <p>{err}</p>
+                  </div>
+                ))}
+            </div>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -150,13 +208,12 @@ export default function SingupForm() {
               <label className="text-sm" htmlFor="password">
                 Password
               </label>
-              <Link className="text-sm text-primary" href="/">
-                Forgot password?
-              </Link>
             </div>
-            <div className="has-focus:outline has-focus:outline-primary border border-border p-2 text-lg rounded-lg bg-secondary/20 flex gap-2 justify-between items-center ">
+            <div
+              className={`has-focus:outline has-focus:outline-primary border border-border p-2 text-lg rounded-lg bg-secondary/20 flex gap-2 justify-between items-center ${error.password.length !== 0 ? "border-error-state" : "border-border"}`}
+            >
               <input
-                className="border-none outline-none w-full"
+                className={`border-none outline-none w-full `}
                 name="password"
                 type={show ? "text" : "password"}
                 value={userData.password}
@@ -169,6 +226,19 @@ export default function SingupForm() {
                 <EyeOff onClick={() => setShow(true)} />
               )}
             </div>
+
+            <div className="flex flex-col gap-2">
+              {error.password &&
+                error.password.map((err) => (
+                  <div
+                    className=" flex gap-4 border rounded border-error-state text-error-state bg-error-state/10 py-2 px-4 animate-pulse "
+                    key={err}
+                  >
+                    <CircleAlert />
+                    <p>{err}</p>
+                  </div>
+                ))}
+            </div>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -176,13 +246,26 @@ export default function SingupForm() {
               Confirm Password
             </label>
             <input
-              className="border border-border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary"
+              className={`border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary ${error.confirm.length !== 0 ? "border-error-state" : "border-border"}`}
               type="text"
               name="confirm"
               value={userData.confirm}
               onChange={(e) => handleChange(e.target.name, e.target.value)}
               placeholder="Re-Enter your password"
             />
+
+            <div className="flex flex-col gap-2">
+              {error.confirm &&
+                error.confirm.map((err) => (
+                  <div
+                    className=" flex gap-4 border rounded border-error-state text-error-state bg-error-state/10 py-2 px-4 animate-pulse "
+                    key={err}
+                  >
+                    <CircleAlert />
+                    <p>{err}</p>
+                  </div>
+                ))}
+            </div>
           </div>
 
           <button

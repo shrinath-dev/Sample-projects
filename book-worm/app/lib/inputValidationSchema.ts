@@ -1,4 +1,4 @@
-import {literal, z} from 'zod';
+import {literal, z, ZodAny} from 'zod';
 
 
 
@@ -67,21 +67,50 @@ export const SignupDataSchema = z.object({
   })
   .max(15, {
     error: "Password should be only max 15 characters long"
-  }),
+  })
+  .refine(
+    (value) => {
+      return /[A-Z]+/.test(value)
+    },
+    {
+      error: 'Password must contain atleast one uppercase character.'
+    }
+  )
+  .refine(
+    (value) => {
+      return /[a-z]+/.test(value)
+    },
+    {
+      error: 'Password must contain atleast one lowercase character.'
+    }
+  )
+  .refine(
+    (value) => {
+      return /[0-9]+/.test(value)
+    },
+    {
+      error: 'Password must contain atleast one digit.'
+    }
+  )
+  .refine(
+    (value) => {
+      return /[@#!%^&*()]+/.test(value)
+    },
+    {
+      error: 'Password must contain atleast one special character !@#$%^&*().'
+    }
+  ),
 
   confirm : z.string()
-}).refine(
-  (data) =>{
-    data.password === data.confirm ,
-    {
-      message: 'Password do not match.',
-      path: ["confirm"],
+})
 
-      when(payload: any) { 
-      return SignupDataSchema 
-        .pick({ password: true, confirm: true }) 
-        .safeParse(payload.value).success; 
-    },  
-    }
+
+export const  ConfirmPasswordSchema = SignupDataSchema.pick({password: true, confirm: true}).refine(
+  (data) => data.password === data.confirm ,
+  {
+    error: 'Password don\'t match.',
+    path: ['confirm']
   }
 )
+
+
