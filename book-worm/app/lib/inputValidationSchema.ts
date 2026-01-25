@@ -1,4 +1,4 @@
-import {literal, z, ZodAny} from 'zod';
+import {z} from 'zod';
 
 
 
@@ -103,7 +103,7 @@ export const SignupDataSchema = z.object({
 
   confirm : z.string()
 })
-
+export type SignupDataSchemaType = z.infer<typeof SignupDataSchema>
 
 export const  ConfirmPasswordSchema = SignupDataSchema.pick({password: true, confirm: true}).refine(
   (data) => data.password === data.confirm ,

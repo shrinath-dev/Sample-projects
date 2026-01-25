@@ -1,14 +1,22 @@
 "use client";
 
 import { FormEvent, useEffect, useState, useRef } from "react";
-import { BookOpenText, Eye, EyeOff, CircleAlert } from "lucide-react";
+import {
+  BookOpenText,
+  Eye,
+  EyeOff,
+  CircleAlert,
+  CircleCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   SignupDataSchema,
   ConfirmPasswordSchema,
+  SignupDataSchemaType,
 } from "@/app/lib/inputValidationSchema";
 import { SignupData } from "@/app/lib/userDefinedTypes";
+import isValidUsername from "@/app/lib/serverActions/checkExistingUsername";
 
 export default function SingupForm() {
   const ref = useRef<keyof SignupData<string>>(null);
@@ -46,6 +54,8 @@ export default function SingupForm() {
       [name]: value,
     }));
   };
+
+  const checkAgainstSchema = () => {}; // here i  got a thought to somehow develope a single fucntion validate all field with given field and data as parameter
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -104,6 +114,35 @@ export default function SingupForm() {
     };
   }, [userData]);
 
+  useEffect(() => {
+    let val: keyof SignupDataSchemaType = "username"; // only left here to refer to develop checkAgainstSchema function usign this type.
+    if (ref.current === null) return;
+    const t = setTimeout(async () => {
+      // logic to check that username is availabel or not
+      // if not available show an error
+      // if available let it go
+      //if valid username then check for availabilty
+      const result = SignupDataSchema.pick({ [val]: true }).safeParse({
+        username: userData.username,
+      });
+      if (result.success) {
+        let isValid = await isValidUsername(userData.username);
+
+        if (!isValid) {
+          setError((prev) => ({
+            ...prev,
+            username: [
+              `'${userData.username}' is already taken, please try another username.`,
+            ],
+          }));
+        }
+      }
+    }, 500);
+    return () => {
+      clearTimeout(t);
+    };
+  }, [userData.username]);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     router.push("/dashboard");
@@ -153,17 +192,27 @@ export default function SingupForm() {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-sm" htmlFor="username">
-              Username
-            </label>
-            <input
-              className={`border p-2 text-lg rounded-lg bg-secondary/20 focus:outline focus:outline-primary ${error.username.length !== 0 ? "border-error-state" : "border-border"}`}
-              type="text"
-              name="username"
-              value={userData.username}
-              onChange={(e) => handleChange(e.target.name, e.target.value)}
-              placeholder="user_123"
-            />
+            <div className="flex justify-between items-center">
+              <label className="text-sm" htmlFor="username">
+                Username
+              </label>
+            </div>
+            <div
+              className={`has-focus:outline has-focus:outline-primary border border-border p-2 text-lg rounded-lg bg-secondary/20 flex gap-2 justify-between items-center ${error.username.length !== 0 ? "border-error-state" : "border-border"}`}
+            >
+              <input
+                className={`border-none outline-none w-full `}
+                name="username"
+                type="text"
+                value={userData.username}
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+                placeholder="user_123"
+              />
+              {error.username.length === 0 && userData.username !== "" && (
+                <CircleCheck color="green" />
+              )}
+            </div>
+
             <div className="flex flex-col gap-2">
               {error.username &&
                 error.username.map((err) => (
