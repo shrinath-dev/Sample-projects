@@ -50,11 +50,11 @@ export const SignupDataSchema = z.object({
       )
   .refine(
     (value) =>{
-      let rgx = /^[A-z0-9a-z_]+$/
+      let rgx = /^[0-9a-z_]+$/
       return rgx.test(value)
     },
     {
-      error: "The username should contain only alphanumeric or ( _ ) "
+      error: "The username should contain only lowercase alphanumeric or ( _ ) "
     }
   ),
 
@@ -103,6 +103,7 @@ export const SignupDataSchema = z.object({
 
   confirm : z.string()
 })
+
 export type SignupDataSchemaType = z.infer<typeof SignupDataSchema>
 
 export const  ConfirmPasswordSchema = SignupDataSchema.pick({password: true, confirm: true}).refine(

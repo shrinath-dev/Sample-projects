@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useActionState } from "react";
 import {
   BookOpenText,
   Eye,
@@ -16,7 +16,8 @@ import {
   SignupDataSchemaType,
 } from "@/app/lib/inputValidationSchema";
 import { SignupData } from "@/app/lib/userDefinedTypes";
-import isValidUsername from "@/app/lib/serverActions/checkExistingUsername";
+import { isValidUsername } from "@/app/lib/serverActions/checkExistingUsername";
+import { createUser } from "@/app/lib/serverActions/signupUser";
 
 export default function SingupForm() {
   const ref = useRef<keyof SignupData<string>>(null);
@@ -126,7 +127,7 @@ export default function SingupForm() {
         username: userData.username,
       });
       if (result.success) {
-        let isValid = await isValidUsername(userData.username);
+        let isValid = await isValidUsername(userData.username.trim());
 
         if (!isValid) {
           setError((prev) => ({
@@ -143,10 +144,7 @@ export default function SingupForm() {
     };
   }, [userData.username]);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    router.push("/dashboard");
-  };
+  const [state, formAction, pending] = useActionState(createUser, null);
 
   return (
     <>
@@ -164,7 +162,7 @@ export default function SingupForm() {
             </p>
           </div>
         </div>
-        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label className="text-sm" htmlFor="fullname">
               Full Name
@@ -322,11 +320,13 @@ export default function SingupForm() {
             disabled={
               !(
                 error.email.length === 0 &&
+                error.username.length === 0 &&
                 error.fullname.length === 0 &&
                 error.password.length === 0 &&
                 error.confirm.length === 0 &&
                 Boolean(
                   userData.email.trim() &&
+                  userData.username.trim() &&
                   userData.password.trim() &&
                   userData.fullname.trim() &&
                   userData.confirm.trim(),
@@ -335,7 +335,7 @@ export default function SingupForm() {
             }
             className="bg-primary text-center text-sm rounded-lg p-2 cursor-pointer text-muted disabled:cursor-not-allowed disabled:bg-primary/20"
           >
-            Sign Up
+            {pending ? "Creating User..." : "Sign Up"}
           </button>
         </form>
 
