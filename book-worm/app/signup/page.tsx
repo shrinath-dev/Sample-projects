@@ -1,7 +1,7 @@
 import { GoBack, SingupForm } from "../uiComponents";
 import Image from "next/image";
 
-export default function loginPage() {
+export default function signupPage() {
   return (
     <section className="mx-auto">
       <div className="grid md:grid-cols-2 gap-4 justify-center items-center">

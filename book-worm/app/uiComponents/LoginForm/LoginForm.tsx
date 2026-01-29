@@ -1,9 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { BookOpenText, Eye, EyeOff } from "lucide-react";
+import { FormEvent, useActionState, useState } from "react";
+import { BookOpenText, Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { loginUser } from "@/app/lib/signInUser";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -23,11 +24,12 @@ export default function LoginForm() {
     }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    router.push("/dashboard");
-  };
+  // const handleSubmit = (e: FormEvent) => {
+  //   e.preventDefault();
+  //   router.push("/dashboard");
+  // };
 
+  const [state, formAction, pending] = useActionState(loginUser, null);
   return (
     <>
       <div className="bg-popover p-4 border-0 rounded-xl w-full max-w-md flex flex-col gap-4 ">
@@ -44,7 +46,7 @@ export default function LoginForm() {
             </p>
           </div>
         </div>
-        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label className="text-sm" htmlFor="email">
               Email
@@ -89,15 +91,24 @@ export default function LoginForm() {
             type="submit"
             disabled={
               !(
+                !pending &&
                 error === null &&
                 Boolean(data.email.trim() && data.password.trim())
               )
             }
             className="bg-primary text-center text-sm rounded-lg p-2 cursor-pointer text-muted disabled:cursor-not-allowed disabled:bg-primary/20"
           >
-            Sign In
+            {pending ? <Loader2 className="animate-spin mx-auto" /> : "Sign In"}
           </button>
         </form>
+
+        {state === null ? (
+          ""
+        ) : (
+          <div className=" flex gap-4 border rounded border-error-state text-error-state bg-error-state/10 py-2 px-4 animate-pulse ">
+            {state.message}
+          </div>
+        )}
 
         <p className="text-sm text-center mt-3">
           Don't have an account?{" "}
